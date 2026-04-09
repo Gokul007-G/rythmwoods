@@ -1,0 +1,118 @@
+/**
+ * Rythm Event Page Styles
+ */
+.event-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.event-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+}
+
+.event-card-header {
+    background-color: deepPink;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-card-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.event-controls {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-box input {
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 200px;
+}
+
+/* Table Styles */
+.table-responsive {
+    padding: 0 20px 20px;
+    overflow-x: auto;
+}
+
+.event-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.event-table th {
+    background-color: #f8f9fa;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.event-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.event-table tr:hover {
+    background-color: #f1f3f5;
+}
+
+.action-icons img {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.action-icons img:hover {
+    opacity: 0.7;
+}
+
+/* Status colors as per original */
+.amount-paid {
+    color: green;
+    font-weight: 600;
+}
+
+.amount-pending {
+    color: red;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .event-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .search-box input {
+        width: 100%;
+    }
+}

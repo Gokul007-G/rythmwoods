@@ -1,0 +1,49 @@
+/**
+ * Rythm Structural Layout & Alignment
+ */
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+}
+
+/* Sidebar Offset Handling */
+.content-wrapper {
+    margin-left: 280px; /* Must match sidebar width */
+    width: calc(100% - 280px);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Perfect Centering for Body Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    padding: 2rem 1rem;
+    background-color: #f8f9fa;
+}
+
+/* Center Feed Content */
+.feed-container {
+    width: 100%;
+    max-width: 600px; /* Standard feed width */
+    margin: 0 auto;
+}
+
+/* Form Centering Helper */
+.form-centered {
+    max-width: 450px;
+    margin: 3rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* Centered Navbar Elements */
+.navbar .container-fluid {
+    max-width: 1300px;
+}

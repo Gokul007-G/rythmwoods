@@ -1,0 +1,20 @@
+2022-10-20 05:52:16 SERVER -&gt; CLIENT: 220 smtp.gmail.com ESMTP 12-20020a170902c20c00b001750361f430sm11787517pll.155 -
+gsmtp<br>
+2022-10-20 05:52:16 CLIENT -&gt; SERVER: EHLO bsplassetsrv.bluebase.in<br>
+2022-10-20 05:52:17 SERVER -&gt; CLIENT: 250-smtp.gmail.com at your service, [49.249.229.10]250-SIZE 35882577250-8BITMIME250-STARTTLS250-ENHANCEDSTATUSCODES250-PIPELINING250-CHUNKING250 SMTPUTF8<br>
+2022-10-20 05:52:17 CLIENT -&gt; SERVER: STARTTLS<br>
+2022-10-20 05:52:17 SERVER -&gt; CLIENT: 220 2.0.0 Ready to start TLS<br>
+2022-10-20 05:52:17 CLIENT -&gt; SERVER: EHLO bsplassetsrv.bluebase.in<br>
+2022-10-20 05:52:17 SERVER -&gt; CLIENT: 250-smtp.gmail.com at your service, [49.249.229.10]250-SIZE 35882577250-8BITMIME250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH250-ENHANCEDSTATUSCODES250-PIPELINING250-CHUNKING250 SMTPUTF8<br>
+2022-10-20 05:52:17 CLIENT -&gt; SERVER: AUTH LOGIN<br>
+2022-10-20 05:52:17 SERVER -&gt; CLIENT: 334 VXNlcm5hbWU6<br>
+2022-10-20 05:52:17 CLIENT -&gt; SERVER: cHJhdmkxOTkzLm1AZ21haWwuY29t<br>
+2022-10-20 05:52:18 SERVER -&gt; CLIENT: 334 UGFzc3dvcmQ6<br>
+2022-10-20 05:52:18 CLIENT -&gt; SERVER: TVBWMTI3MTM0MA==<br>
+2022-10-20 05:52:18 SERVER -&gt; CLIENT: 535-5.7.8 Username and Password not accepted. Learn more at535 5.7.8  https://support.google.com/mail/?p=BadCredentials 12-20020a170902c20c00b001750361f430sm11787517pll.155 - gsmtp<br>
+2022-10-20 05:52:18 SMTP ERROR: Password command failed: 535-5.7.8 Username and Password not accepted. Learn more at535 5.7.8  https://support.google.com/mail/?p=BadCredentials 12-20020a170902c20c00b001750361f430sm11787517pll.155 - gsmtp<br>
+SMTP Error: Could not authenticate.<br>
+2022-10-20 05:52:18 CLIENT -&gt; SERVER: QUIT<br>
+2022-10-20 05:52:18 SERVER -&gt; CLIENT: 221 2.0.0 closing connection 12-20020a170902c20c00b001750361f430sm11787517pll.155 - gsmtp<br>
+SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting<br>
+Message was not sent.Mailer error: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting[{"status":"true"}]
