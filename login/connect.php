@@ -23,7 +23,7 @@ class Database
     {
         $this->con = null;
         try {
-            $this->con = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->email, $this->password);
+            $this->con = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
             $this->con->exec("set names utf8");
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();

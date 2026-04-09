@@ -5,7 +5,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$cat = $_SESSION['title'] ?? 'guest';
+$cat = $_SESSION['title'] ?? 'user';
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 <aside class="sidebar">
@@ -38,7 +38,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
             <hr class="mx-3 opacity-25">
 
-            <?php if ($cat == 'singer' || $cat == 'amateur singer' || $cat == 'musician' || $cat == 'bands') { ?>
+                            <?php 
+                $allowed_roles = ['singer', 'musician', 'bands', 'event manager', 'lighting', 'sound'];
+
+                if (in_array(strtolower($cat), $allowed_roles)) { 
+                ?>
+                
                 <hr class="mx-3 opacity-25">
                 <li class="sidebar-item" onclick="showdirectors()">
                     <img src="/rythm/assets/music director.png" alt="Music Director" class="sidebar-icon">

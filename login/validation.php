@@ -21,12 +21,14 @@ $num_of_rows = $res->rowCount();
 		if($password==$md5password)
 		{
 			
-			//echo "if";
-			$_SESSION['username']=$row['email'];
-			$_SESSION['user_name']=$row['name'];
-			$_SESSION['rolemaster_id']=$row['role_master_id'];
-			$_SESSION['title']=$row['title'];
-			$_SESSION['start'] = time();   $_SESSION['expire'] = $_SESSION['start'] + (60*5);
+			    $_SESSION['users_id'] = $row['id']; 
+				$_SESSION['username']=$row['email'];
+				$_SESSION['user_name']=$row['name'];
+				$_SESSION['role_master_id']=$row['role_master_id']; 
+				$_SESSION['title']=$row['title'];
+
+				$_SESSION['start'] = time();   
+				$_SESSION['expire'] = $_SESSION['start'] + (60*5);
 			if($row['profile_update_status']!=1)
 			{				
 			header('Location:profilecreate.php');

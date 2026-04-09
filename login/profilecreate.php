@@ -3,12 +3,22 @@ session_start();
 
 require("connect.php");
 
-$username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
-$users_id_session = $_SESSION['users_id'];
+if (!isset($_SESSION['users_id'])) {
+    header("Location: login.php");
+    exit;
+}
 
-$sql2 = $con->query("SELECT * FROM `user_master` where id='$users_id_session'");
-$profiledtils = $sql2->fetch(PDO::FETCH_ASSOC);
+$username = $_SESSION['user_name'] ?? '';
+$rolemaster_id = $_SESSION['role_master_id'] ?? '';
+$users_id_session = $_SESSION['users_id'] ?? '';
+
+$sql2 = $con->query("SELECT * FROM user_master WHERE id='$users_id_session'");
+
+if ($sql2 && $sql2->rowCount() > 0) {
+    $profiledtils = $sql2->fetch(PDO::FETCH_ASSOC);
+} else {
+    $profiledtils = [];
+}
 
 ?>
 
@@ -236,19 +246,19 @@ $profiledtils = $sql2->fetch(PDO::FETCH_ASSOC);
         <form method="POST" action="afterprofileinsert.php" onsubmit="return validateForm();" enctype="multipart/form-data">
           <div class="form-group">
             <label for="firstname">First Name:</label>
-            <input type="text" id="firstname" name="firstname" value="<?php echo $profiledtils['name']; ?>" />
+            <input type="text" id="firstname" name="firstname" value="<?php echo $profiledtils['name'] ?? ''; ?>" />
             <label for="lastname">Last Name:</label>
-            <input type="text" id="lastname" name="lastname" value="<?php echo $profiledtils['last_name']; ?>" />
+            <input type="text" id="lastname" name="lastname" value="<?php echo $profiledtils['last_name'] ?? ''; ?>" />
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="<?php echo $profiledtils['email']; ?>" />
+            <input type="text" id="email" name="email" value="<?php echo $profiledtils['email'] ?? ''; ?>" />
             <label for="contact">Contact:</label>
-            <input type="text" id="contact" name="contact" value="<?php echo $profiledtils['mobile_no']; ?>" />
+            <input type="text" id="contact" name="contact" value="<?php echo $profiledtils['mobile_no'] ?? ''; ?>" />
           </div><br>
           <div class="form-group">
             <label for="location">Location:</label>
-            <input type="text" id="location" name="location" value="" />
+            <input type="text" id="location" name="location" value="<?php echo $profiledtils['location'] ?? ''; ?>" />
           </div><br>
           <div class="form-group">
             <label for="about">About:</label>
