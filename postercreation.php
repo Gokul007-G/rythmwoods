@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $pageTitle = "Rythm - Create Post";
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 $user_name = $_SESSION['user_name'];
 
 include("includes/header.php");
