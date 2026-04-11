@@ -2,7 +2,7 @@
 session_start();
 // include("user.php");
 $username=$_SESSION['username'];
-$rolemaster_id=$_SESSION['rolemaster_id'];
+$rolemaster_id=$_SESSION['role_master_id'];
 require(".././connect.php");
 $eventid=$_REQUEST['eventid'];//eventid
 $eventname=$_REQUEST['eventname'];

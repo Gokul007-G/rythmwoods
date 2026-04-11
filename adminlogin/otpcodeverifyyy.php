@@ -21,7 +21,7 @@ if (isset($_SESSION["fromailid"], $_SESSION["newpasswordd"], $_SESSION["newconfi
   // echo "Received Email: $receivedEmail<br>";
     //echo "New Password: $newPassword<br>";
    // echo "New Confirm Password: $newConfirmPassword<br>";
-	$sql=$con->query("SELECT * FROM `otptable` WHERE email='$receivedEmail' and password='$newPassword' and confirmpassword='$newConfirmPassword' ORDER BY id DESC");
+	$sql=$con->query("SELECT * FROM `S` WHERE email='$receivedEmail' and password='$newPassword' and confirmpassword='$newConfirmPassword' ORDER BY id DESC");
 	
 	$row = $sql->fetch(PDO::FETCH_ASSOC);
 	

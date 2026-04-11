@@ -4,7 +4,7 @@ session_start();
 include("connect.php");
 
 $username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 $alldata = $_REQUEST['alldata'];
 //echo $alldata.'#####';
 $splitthedata = explode('**', $alldata);

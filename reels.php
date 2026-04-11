@@ -142,7 +142,7 @@ include("includes/header.php");
                 </div>
                 <div class="user-list overflow-auto px-3 py-2" style="max-height: 300px;" id="shareUserList">
                     <?php
-                    $rolemaster_id = $_SESSION['rolemaster_id'];
+                    $rolemaster_id = $_SESSION['role_master_id'];
                     $stmt = $con->prepare("SELECT * FROM user_master WHERE role_master_id != ?");
                     $stmt->execute([$rolemaster_id]);
                     while($u = $stmt->fetch(PDO::FETCH_ASSOC)):

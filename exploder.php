@@ -72,7 +72,7 @@ session_start();
 require("connect.php");	
 
 $username = $_SESSION['username'];
- $rolemaster_id = $_SESSION['rolemaster_id'];  
+ $rolemaster_id = $_SESSION['role_master_id'];  
 
 $getall = $con->query("SELECT * FROM `posters` WHERE status = '1' order by id desc");
 $dyn = 0;

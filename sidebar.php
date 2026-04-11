@@ -4,7 +4,7 @@
 <li class="nav-item has-treeview menu-open">
 
 <?php
-$rolemaster_id=$_SESSION['rolemaster_id'];
+$rolemaster_id=$_SESSION['role_master_id'];
 $sql = $con->query("SELECT masters_menu.id as id,masters_menu.menu_name FROM `masters_menu` INNER JOIN role_mapping ON masters_menu.id = role_mapping.menu_id
 WHERE role_mapping.role_id='$rolemaster_id' group by menu_name"); 
 

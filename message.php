@@ -28,11 +28,12 @@ include("includes/header.php");
             </div>
             <div class="flex-grow-1 overflow-auto" id="userList">
                 <!-- User Item -->
-                <div class="user-item p-3 d-flex align-items-center gap-3 border-bottom cursor-pointer hover-bg-light" onclick="loadChat(123, 'Lion', '/rythm/assets/images/lion.png')">
-                    <img src="/rythm/assets/images/lion.png" alt="User" class="rounded-circle border" style="width: 50px; height: 50px; object-fit: cover;">
+                <div class="user-item p-3 d-flex align-items-center gap-3 border-bottom cursor-pointer hover-bg-light"
+                        onclick="loadChat(123, 'Lion', '/rythm/assets/lion.png', this)">
+                    <img src="/rythm/assets/lion.png" alt="User" class="rounded-circle border" style="width: 50px; height: 50px; object-fit: cover;">
                     <div class="flex-grow-1">
                         <div class="d-flex justify-content-between">
-                            <h6 class="mb-0 fw-bold">Lion</h6>
+                            <h6 class="mb-0 fw-bold username">Lion</h6>
                             <small class="text-muted">12:45 PM</small>
                         </div>
                         <p class="small text-muted mb-0 text-truncate">Hey! How are you?</p>
@@ -42,27 +43,35 @@ include("includes/header.php");
         </div>
 
         <!-- Main: Chat Window -->
-        <div class="col-md-8 h-100 d-flex flex-column bg-light bg-opacity-25">
+       <div class="col-md-8 h-100 d-flex flex-column bg-light bg-opacity-25">
+
             <header class="p-3 border-bottom bg-white d-flex align-items-center gap-3">
-                <img src="/rythm/assets/images/lion.png" alt="User" id="chatHeaderImg" class="rounded-circle border" style="width: 40px; height: 40px; object-fit: cover;">
+                <img src="/rythm/assets/lion.png" id="chatHeaderImg"
+                    class="rounded-circle border" style="width: 40px; height: 40px;">
                 <h6 class="mb-0 fw-bold" id="chatHeaderName">Lion</h6>
             </header>
 
             <div class="flex-grow-1 p-4 overflow-auto d-flex flex-column gap-3" id="chatMessages">
                 <div class="text-center text-muted small my-5 py-5">
-                    <img src="/rythm/assets/images/send.png" alt="Send" class="opacity-25 mb-3" style="width: 80px;">
+                    <img src="/rythm/assets/send.png" class="opacity-25 mb-3" style="width: 80px;">
                     <p>Select a friend from the list to start a conversation.</p>
                 </div>
             </div>
 
             <footer class="p-3 bg-white border-top">
                 <form id="messageForm" class="d-flex gap-2 align-items-center">
-                    <input type="text" id="messageInput" class="form-control rounded-pill border-0 bg-light px-4" placeholder="Type a message..." autocomplete="off" style="height: 45px;">
-                    <button type="submit" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; background: #0084ff; border: none;">
-                        <img src="/rythm/assets/images/send.png" alt="Send" style="width: 18px; filter: invert(1);">
+                    <input type="text" id="messageInput"
+                        class="form-control rounded-pill border-0 bg-light px-4"
+                        placeholder="Type a message..." style="height:45px;">
+
+                    <button type="submit"
+                            class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
+                            style="width:45px;height:45px;background:#0084ff;border:none;">
+                        <img src="/rythm/assets/send.png" style="width:18px;filter:invert(1);">
                     </button>
                 </form>
             </footer>
+
         </div>
     </div>
 </div>

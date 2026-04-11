@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 01:06 PM
+-- Generation Time: Apr 09, 2026 at 12:51 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `addsongsinevent` (
-  `eventid` int(6) NOT NULL,
-  `tilte` int(6) NOT NULL,
+  `eventid` int(11) NOT NULL,
+  `tilte` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time(6) NOT NULL,
-  `songslistid` int(6) NOT NULL,
+  `songslistid` int(11) NOT NULL,
   `pairname` varchar(6) NOT NULL,
   `created_by` varchar(6) NOT NULL,
   `created_on` time(6) NOT NULL,
@@ -47,7 +47,8 @@ INSERT INTO `addsongsinevent` (`eventid`, `tilte`, `date`, `time`, `songslistid`
 (0, 0, '0000-00-00', '00:00:00.000000', 0, '?', '?', '14:42:42.000000', '?'),
 (0, 0, '0000-00-00', '00:00:00.000000', 0, '?', '?', '14:42:43.000000', '?'),
 (2, 0, '2024-03-14', '18:52:00.000000', 9, '\'kk\',\'', 'rythmw', '15:04:38.000000', 'singer'),
-(1, 0, '2024-03-07', '14:46:00.000000', 18, '\'john\'', 'rythmw', '15:06:23.000000', 'singer');
+(1, 0, '2024-03-07', '14:46:00.000000', 18, '\'john\'', 'rythmw', '15:06:23.000000', 'singer'),
+(20, 0, '2026-04-28', '10:30:00.000000', 9, '\'surya', 'nehagi', '15:07:25.000000', 'singer');
 
 -- --------------------------------------------------------
 
@@ -83,6 +84,7 @@ CREATE TABLE `daily_event` (
   `date` date NOT NULL,
   `time` time NOT NULL,
   `organizer` varchar(2000) NOT NULL,
+  `location` varchar(255) DEFAULT NULL,
   `amount` varchar(1000) NOT NULL,
   `songs` varchar(2000) NOT NULL,
   `singer_type` varchar(100) NOT NULL,
@@ -94,25 +96,27 @@ CREATE TABLE `daily_event` (
 -- Dumping data for table `daily_event`
 --
 
-INSERT INTO `daily_event` (`id`, `users_id`, `title`, `description`, `date`, `time`, `organizer`, `amount`, `songs`, `singer_type`, `created_on`, `createdby`) VALUES
-(1, 3, 'deva', 'sdfghjuytrewsdfgfd', '2024-03-07', '14:46:00', 'deve and team', '300000', '-', 'singer', '2024-03-07 13:44:59', 'rythmwoods@gmail.in'),
-(2, 3, 'u1', 'edftgyuiuytrewsxcvbnhgfrew', '2024-03-14', '18:52:00', 'u1 &team', '200000', '-', 'singer', '2024-03-07 13:47:04', 'rythmwoods@gmail.in'),
-(3, 3, 'erwewer', 'werwerssweffdd', '2024-03-05', '15:52:00', 'deva and group', '5454545', '-', 'singer', '2024-03-07 13:49:19', 'rythmwoods@gmail.in'),
-(4, 3, 'ddss', 'erewrewr', '2024-03-12', '15:54:00', 'dsfsdf', '4545', '-', '', '2024-03-07 13:51:47', 'rythmwoods@gmail.in'),
-(5, 3, 'ssdsad', 'dfdsd', '2024-03-27', '15:58:00', 'erwer', '4545454545', '-', '', '2024-03-07 13:56:07', 'rythmwoods@gmail.in'),
-(6, 3, 'asas', 'sewew', '2024-03-22', '15:59:00', 'njnjn', '3434', '-', '', '2024-03-07 13:59:43', 'rythmwoods@gmail.in'),
-(7, 0, 'mkjk', 'kml', '2024-03-07', '15:02:00', 'k', '7000', '-', '', '2024-03-07 14:03:46', ''),
-(8, 0, 'erer', 'werfsdf', '2024-03-17', '15:05:00', 'erwer', '32333', '-', '', '2024-03-07 14:04:33', ''),
-(9, 0, 'karthis cocept', 'loiuytredcvbnklkjhgfcvbnkl', '2024-03-23', '15:08:00', 'karthick team', '400000', '-', '', '2024-03-07 14:05:36', ''),
-(10, 0, 'New', 'fcsdxf', '2024-08-29', '00:52:00', 'New', '2000', '-', '', '2024-08-05 09:53:16', ''),
-(11, 0, 'Singing', 'Singing', '2024-09-04', '12:00:00', 'XYZ', '10000', '-', '', '2024-09-04 14:02:55', ''),
-(12, 0, '$title', '$description', '0000-00-00', '00:00:00', '$organizer', '$amount', '-', '', '2025-02-27 20:52:03', '$username'),
-(13, 0, '$title', '$description', '0000-00-00', '00:00:00', '$organizer', '$amount', '-', '', '2025-03-24 14:30:56', '$username'),
-(14, 0, '$title', '$description', '0000-00-00', '00:00:00', '$organizer', '$amount', '-', '', '2025-03-24 14:30:57', '$username'),
-(15, 3, 'rytuu', 'ytytu', '2025-03-25', '14:19:00', 'uyyuyiui', '100000000', '-', '', '2025-03-25 12:19:22', 'rythmwoods@gmail.in'),
-(16, 3, 'rytuu', 'ytytu', '2025-03-25', '14:19:00', 'uyyuyiui', '100000000', '-', '', '2025-03-25 12:19:45', 'rythmwoods@gmail.in'),
-(17, 3, 'rytuu', 'ytytu', '2025-03-25', '14:19:00', 'uyyuyiui', '100000000', '-', '', '2025-03-25 12:21:20', 'rythmwoods@gmail.in'),
-(19, 3, 'hhhhh', 'kkkk', '2025-04-01', '12:47:00', 'kkkk', '37642', '-', '', '2025-04-01 12:48:08', 'rythmwoods@gmail.in');
+INSERT INTO `daily_event` (`id`, `users_id`, `title`, `description`, `date`, `time`, `organizer`, `location`, `amount`, `songs`, `singer_type`, `created_on`, `createdby`) VALUES
+(1, 3, 'deva', 'sdfghjuytrewsdfgfd', '2024-03-07', '14:46:00', 'deve and team', NULL, '300000', '-', 'singer', '2024-03-07 13:44:59', 'rythmwoods@gmail.in'),
+(2, 3, 'u1', 'edftgyuiuytrewsxcvbnhgfrew', '2024-03-14', '18:52:00', 'u1 &team', NULL, '200000', '-', 'singer', '2024-03-07 13:47:04', 'rythmwoods@gmail.in'),
+(3, 3, 'erwewer', 'werwerssweffdd', '2024-03-05', '15:52:00', 'deva and group', NULL, '5454545', '-', 'singer', '2024-03-07 13:49:19', 'rythmwoods@gmail.in'),
+(4, 3, 'ddss', 'erewrewr', '2024-03-12', '15:54:00', 'dsfsdf', NULL, '4545', '-', '', '2024-03-07 13:51:47', 'rythmwoods@gmail.in'),
+(5, 3, 'ssdsad', 'dfdsd', '2024-03-27', '15:58:00', 'erwer', NULL, '4545454545', '-', '', '2024-03-07 13:56:07', 'rythmwoods@gmail.in'),
+(6, 3, 'asas', 'sewew', '2024-03-22', '15:59:00', 'njnjn', NULL, '3434', '-', '', '2024-03-07 13:59:43', 'rythmwoods@gmail.in'),
+(7, 0, 'mkjk', 'kml', '2024-03-07', '15:02:00', 'k', NULL, '7000', '-', '', '2024-03-07 14:03:46', ''),
+(8, 0, 'erer', 'werfsdf', '2024-03-17', '15:05:00', 'erwer', NULL, '32333', '-', '', '2024-03-07 14:04:33', ''),
+(9, 0, 'karthis cocept', 'loiuytredcvbnklkjhgfcvbnkl', '2024-03-23', '15:08:00', 'karthick team', NULL, '400000', '-', '', '2024-03-07 14:05:36', ''),
+(10, 0, 'New', 'fcsdxf', '2024-08-29', '00:52:00', 'New', NULL, '2000', '-', '', '2024-08-05 09:53:16', ''),
+(11, 0, 'Singing', 'Singing', '2024-09-04', '12:00:00', 'XYZ', NULL, '10000', '-', '', '2024-09-04 14:02:55', ''),
+(12, 0, '$title', '$description', '0000-00-00', '00:00:00', '$organizer', NULL, '$amount', '-', '', '2025-02-27 20:52:03', '$username'),
+(13, 0, '$title', '$description', '0000-00-00', '00:00:00', '$organizer', NULL, '$amount', '-', '', '2025-03-24 14:30:56', '$username'),
+(14, 0, '$title', '$description', '0000-00-00', '00:00:00', '$organizer', NULL, '$amount', '-', '', '2025-03-24 14:30:57', '$username'),
+(16, 3, 'rytuu', 'ytytu', '2025-03-25', '14:19:00', 'uyyuyiui', NULL, '100000000', '-', '', '2025-03-25 12:19:45', 'rythmwoods@gmail.in'),
+(17, 3, 'rytuu', 'ytytu', '2025-03-25', '14:19:00', 'uyyuyiui', NULL, '100000000', '-', '', '2025-03-25 12:21:20', 'rythmwoods@gmail.in'),
+(19, 3, 'hhhhh', 'kkkk', '2025-04-01', '12:47:00', 'kkkk', NULL, '37642', '-', '', '2025-04-01 12:48:08', 'rythmwoods@gmail.in'),
+(20, 1, 'Fun', 'fun ', '2026-04-28', '10:30:00', 'srm university', 'chennai ', '400000', '-', '', '2026-04-08 12:31:59', 'nehagirish'),
+(21, 1, 'Fun', 'acha', '2026-04-28', '10:30:00', 'srm university', 'chennai ', '400000', '-', '', '2026-04-08 12:32:05', 'nehagirish'),
+(22, 1, 'makkal issai', 'fun', '2026-04-09', '22:35:00', 'srm university', 'chennai ', '200000', '-', '', '2026-04-08 14:43:20', 'nehagirish');
 
 -- --------------------------------------------------------
 
@@ -186,7 +190,8 @@ INSERT INTO `following_details` (`id`, `user_id`, `role_master_id`, `following_s
 (1, 1, 3, 1, '2024-02-21'),
 (148, 10, 3, 1, '0000-00-00'),
 (149, 15, 3, 1, '0000-00-00'),
-(150, 10, 1, 1, '0000-00-00');
+(150, 10, 1, 1, '0000-00-00'),
+(151, 19, 8, 1, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -247,7 +252,6 @@ INSERT INTO `languages` (`id`, `language_name`, `language_code`, `singer_type`, 
 (5, 'Sinhala', 'si', '', ''),
 (6, 'English', 'en', '', ''),
 (7, 'Bengali', 'Be', '', ''),
-(10, 'tamil', '', 'singer', 'active'),
 (11, 'English', '', 'singer', 'active');
 
 -- --------------------------------------------------------
@@ -446,7 +450,7 @@ CREATE TABLE `posters` (
   `postvideos` varchar(2000) NOT NULL,
   `location` varchar(250) NOT NULL,
   `posters_caption` varchar(2000) NOT NULL,
-  `posters_hashtag` varchar(2000) NOT NULL,
+  `posters_hashtag` varchar(2000) DEFAULT NULL,
   `likestatus` int(11) NOT NULL,
   `liker_id` int(11) NOT NULL,
   `likesdate` date NOT NULL,
@@ -460,35 +464,44 @@ CREATE TABLE `posters` (
 -- Dumping data for table `posters`
 --
 
-INSERT INTO `posters` (`id`, `username`, `username_id`, `poster_id`, `post_type`, `postimg`, `postvideos`, `location`, `posters_caption`,`poster_hastag`, `likestatus`, `liker_id`, `likesdate`, `ownlikessts`, `status`, `created_on`, `filepath`) VALUES
-(1, 'bluebase', 2, 1, 'video', '', '/rythm/assets/samplevedio.mp4', 'chennai', 'All is well>s>s', 2, 3, '2024-02-08', 0, 1, '2024-01-09', ''),
-(2, 'ryhtmwoods', 3, 2, 'image', '/rythm/assets/postime22.jpg', '', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', 1, 1, '2024-02-08', 0, 1, '2024-01-29', ''),
-(3, 'skyworld', 2, 3, 'image', '/rythm/assets/meet.jpg', '', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', 1, 2, '2023-01-11', 0, 1, '2024-01-29', ''),
-(4, 'bluestar', 1, 4, 'image', '/rythm/assets/postimg1.jpg', '', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', 1, 3, '2023-01-01', 0, 1, '2024-01-29', ''),
-(5, 'blue', 3, 5, 'video', '', '/rythm/posters/v2.mp4', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', 1, 3, '2024-02-10', 0, 1, '2024-01-29', ''),
-(6, 'quadsel', 3, 6, 'video', '', '/rythm/posters/v4.mp4', 'chennai', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', 2, 2, '2024-02-08', 0, 1, '2024-01-29', ''),
-(23, 'rythmwoods', 3, 23, 'image', '/rythm/posters/musiccc.jpg', '', 'hhhhhhhhhhhh', '', 0, 0, '0000-00-00', 0, 1, '2025-02-27', ''),
-(24, 'nehagirish', 1, 24, 'image', '/rythm/posters/rymmmm.jpg', '', 'okokkpk', '', 0, 0, '0000-00-00', 0, 1, '2025-03-17', ''),
-(25, 'rythmwoods', 3, 25, 'image', '/rythm/posters/musiccc.jpg', '', 'oooo', '', 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
-(26, 'rythmwoods', 3, 26, 'video', '/rythm/posters/v4.mp4', '', 'jjjjjjjjjj', '', 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
-(27, 'rythmwoods', 3, 27, 'image', '/rythm/posters/rymmmm.jpg', '', 'kkk', '', 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
-(28, 'rythmwoods', 3, 28, 'image', '/rythm/posters/rymmmm.jpg', '', 'kkk', '', 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
-(29, 'rythmwoods', 3, 29, 'video', '', '/rythm/posters/', 'jjjjj', '', 0, 0, '0000-00-00', 0, 1, '2025-03-24', ''),
-(30, 'rythmwoods', 3, 30, 'video', '', '/rythm/posters/', 'rythms', '', 0, 0, '0000-00-00', 0, 1, '2025-03-24', ''),
-(31, 'rythmwoods', 3, 31, 'video', '', '/xampp/htdocs/rythm/posters/', 'rythms', '', 0, 0, '0000-00-00', 0, 1, '2025-03-24', ''),
-(32, 'rythmwoods', 3, 32, 'video', '', '/xampp/htdocs/rythm/posters/', 'news', '', 0, 0, '0000-00-00', 0, 1, '2025-03-25', ''),
-(33, 'rythmwoods', 3, 33, 'video', '', '/rythm/posters/n2.mp4', 'rythm', '', 0, 0, '0000-00-00', 0, 1, '2025-03-25', ''),
-(34, 'rythmwoods', 3, 34, 'video', '', '/rythm/posters/n2.mp4', 'rythm', '', 0, 0, '0000-00-00', 0, 1, '2025-03-25', ''),
-(35, 'rythmwoods', 3, 35, 'image', '/rythm/posters/music.jpg', '', 'kkk', '', 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
-(36, 'rythmwoods', 3, 36, 'image', '/rythm/posters/music.jpg', '', 'kkk', '', 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
-(37, 'rythmwoods', 3, 37, 'video', '', '/rythm/posters/v3.mp4', 'kkkk', '', 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
-(38, 'rythmwoods', 3, 38, 'video', '', '/rythm/posters/n2.mp4', 'hhhhhhhhh', '', 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
-(39, 'rythmwoods', 3, 39, 'video', '', '/rythm/posters/u5.mp4', 'ooooooo', '', 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
-(40, 'rythmwoods', 3, 40, 'video', '', '/rythm/posters/u5.mp4', 'ooooooo', '', 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
-(41, 'rythmwoods', 3, 41, 'video', '', '/rythm/posters/sample.mp4', 'llll', '', 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
-(42, 'rythmwoods', 3, 42, 'video', '', '/rythm/posters/v3.mp4', 'lllllllllll', '', 1, 0, '0000-00-00', 1, 1, '2025-04-01', ''),
-(43, 'rythmwoods', 3, 43, 'video', '', '/rythm/posters/u5.mp4', 'llll', '', -1, 0, '0000-00-00', 0, 1, '2025-04-16', ''),
-(44, 'rythmwoods', 3, 44, 'video', '', '/rythm/posters/video.mp4.mp4', 'nature view', '', 1, 0, '0000-00-00', 1, 1, '2025-04-28', '');
+INSERT INTO `posters` (`id`, `username`, `username_id`, `poster_id`, `post_type`, `postimg`, `postvideos`, `location`, `posters_caption`, `posters_hashtag`, `likestatus`, `liker_id`, `likesdate`, `ownlikessts`, `status`, `created_on`, `filepath`) VALUES
+(1, 'bluebase', 2, 1, 'video', '', '/rythm/assets/samplevedio.mp4', 'chennai', 'All is well>s>s', NULL, 2, 3, '2024-02-08', 0, 1, '2024-01-09', ''),
+(2, 'ryhtmwoods', 3, 2, 'image', '/rythm/assets/postime22.jpg', '', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', NULL, 1, 1, '2024-02-08', 0, 1, '2024-01-29', ''),
+(3, 'skyworld', 2, 3, 'image', '/rythm/assets/meet.jpg', '', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', NULL, 1, 2, '2023-01-11', 0, 1, '2024-01-29', ''),
+(4, 'bluestar', 1, 4, 'image', '/rythm/assets/postimg1.jpg', '', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', NULL, 1, 3, '2023-01-01', 0, 1, '2024-01-29', ''),
+(5, 'blue', 3, 5, 'video', '', '/rythm/posters/v2.mp4', 'coimbatour', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', NULL, 1, 3, '2024-02-10', 0, 1, '2024-01-29', ''),
+(6, 'quadsel', 3, 6, 'video', '', '/rythm/posters/v4.mp4', 'chennai', 'Elevate your marketing leadership quotient with our 10-month live online programme. Join now to gain from real-world... ', NULL, 2, 2, '2024-02-08', 0, 1, '2024-01-29', ''),
+(23, 'rythmwoods', 3, 23, 'image', '/rythm/posters/musiccc.jpg', '', 'hhhhhhhhhhhh', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-02-27', ''),
+(24, 'nehagirish', 1, 24, 'image', '/rythm/posters/rymmmm.jpg', '', 'okokkpk', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-17', ''),
+(25, 'rythmwoods', 3, 25, 'image', '/rythm/posters/musiccc.jpg', '', 'oooo', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
+(26, 'rythmwoods', 3, 26, 'video', '/rythm/posters/v4.mp4', '', 'jjjjjjjjjj', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
+(27, 'rythmwoods', 3, 27, 'image', '/rythm/posters/rymmmm.jpg', '', 'kkk', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
+(28, 'rythmwoods', 3, 28, 'image', '/rythm/posters/rymmmm.jpg', '', 'kkk', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-19', ''),
+(29, 'rythmwoods', 3, 29, 'video', '', '/rythm/posters/', 'jjjjj', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-24', ''),
+(30, 'rythmwoods', 3, 30, 'video', '', '/rythm/posters/', 'rythms', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-24', ''),
+(31, 'rythmwoods', 3, 31, 'video', '', '/rythm/posters/', 'rythms', '', NULL, 1, 0, '0000-00-00', 0, 1, '2025-03-24', ''),
+(32, 'rythmwoods', 3, 32, 'video', '', '/rythm/posters/', 'news', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-25', ''),
+(33, 'rythmwoods', 3, 33, 'video', '', '/rythm/posters/n2.mp4', 'rythm', '', NULL, 1, 0, '0000-00-00', 1, 1, '2025-03-25', ''),
+(34, 'rythmwoods', 3, 34, 'video', '', '/rythm/posters/n2.mp4', 'rythm', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-03-25', ''),
+(35, 'rythmwoods', 3, 35, 'image', '/rythm/posters/music.jpg', '', 'kkk', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
+(36, 'rythmwoods', 3, 36, 'image', '/rythm/posters/music.jpg', '', 'kkk', '', NULL, 1, 0, '0000-00-00', 1, 1, '2025-04-01', ''),
+(37, 'rythmwoods', 3, 37, 'video', '', '/rythm/posters/v3.mp4', 'kkkk', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
+(38, 'rythmwoods', 3, 38, 'video', '', '/rythm/posters/n2.mp4', 'hhhhhhhhh', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
+(39, 'rythmwoods', 3, 39, 'video', '', '/rythm/posters/u5.mp4', 'ooooooo', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
+(40, 'rythmwoods', 3, 40, 'video', '', '/rythm/posters/u5.mp4', 'ooooooo', '', NULL, 1, 0, '0000-00-00', 1, 1, '2025-04-01', ''),
+(41, 'rythmwoods', 3, 41, 'video', '', '/rythm/posters/sample.mp4', 'llll', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
+(42, 'rythmwoods', 3, 42, 'video', '', '/rythm/posters/v3.mp4', 'lllllllllll', '', NULL, 1, 0, '0000-00-00', 0, 1, '2025-04-01', ''),
+(43, 'rythmwoods', 3, 43, 'video', '', '/rythm/posters/u5.mp4', 'llll', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-04-16', ''),
+(44, 'rythmwoods', 3, 44, 'video', '', '/rythm/posters/video.mp4.mp4', 'nature view', '', NULL, 2, 0, '0000-00-00', 0, 1, '2025-04-28', ''),
+(45, 'test1', 8, 45, 'image', '/rythm/posters/website.jpg', '', 'Chennai', '', NULL, 1, 0, '0000-00-00', 0, 1, '2025-06-16', ''),
+(46, 'nehagirish', 1, 46, 'image', '/rythm/posters/bird.png', '', 'chennai', 'bird', NULL, 1, 0, '0000-00-00', 1, 1, '2026-04-08', ''),
+(47, 'nehagirish', 1, 47, 'image', '/rythm/posters/HUSTLE.png.jfif', '', 'No Location', 'Money ', 'money WalfOfWallStreet', 2, 0, '0000-00-00', 1, 1, '2026-04-08', ''),
+(50, 'nehagirish', 29, 50, 'image', '/rythm/posters/download.jfif', '', '..', 'JD', 'JD', 1, 0, '0000-00-00', 1, 1, '2026-04-09', ''),
+(49, 'nehagirish', 1, 49, 'image', '/rythm/posters/download.jfif', '', '', 'JD Master', 'Master JD  ', 2, 0, '0000-00-00', 1, 1, '2026-04-08', ''),
+(51, 'nehagirish', 29, 51, 'video', '/rythm/posters/videoplayback.mp4', '', 'No Location', 'Youth Song', 'Youth Ken', 0, 0, '0000-00-00', 0, 1, '2026-04-09', ''),
+(52, 'nehagirish', 29, 52, 'video', '/rythm/posters/videoplayback.mp4', '', 'No Location', 'jd', 'jd', 1, 0, '0000-00-00', 1, 1, '2026-04-09', ''),
+(53, 'nehagirish', 29, 53, 'video', '', '/rythm/posters/videoplayback.mp4', '', 'youth', '', 2, 0, '0000-00-00', 1, 1, '2026-04-09', ''),
+(54, 'surya', 47, 54, 'image', '/rythm/posters/download (1).jfif', '', 'chenni', 'Peice ', 'peice restpiece', 0, 0, '0000-00-00', 0, 1, '2026-04-09', '');
 
 -- --------------------------------------------------------
 
@@ -526,7 +539,15 @@ INSERT INTO `posters_commads` (`id`, `posterid`, `commander_id`, `commands`, `li
 (23, 6, 2, 'gooduuuuu', 0, 0, '2024-02-19'),
 (24, 5, 2, 'sprrrrrr', 0, 0, '2024-02-19'),
 (26, 5, 2, 'very nice', 0, 0, '2024-02-19'),
-(27, 5, 2, 'okkk', 0, 0, '2024-02-19');
+(27, 5, 2, 'okkk', 0, 0, '2024-02-19'),
+(28, 44, 1, 'undefined', 1, 1, '2026-04-06'),
+(29, 40, 1, 'undefined', 0, 0, '2026-04-06'),
+(30, 45, 1, 'undefined', 0, 0, '2026-04-06'),
+(31, 39, 1, 'adad', 0, 0, '2026-04-07'),
+(32, 1, 1, 'ddd', 0, 0, '2026-04-07'),
+(33, 49, 1, 'hi', 0, 0, '2026-04-08'),
+(34, 47, 1, 'money ', 0, 0, '2026-04-08'),
+(35, 40, 1, 'hahah', 0, 0, '2026-04-09');
 
 -- --------------------------------------------------------
 
@@ -552,7 +573,12 @@ INSERT INTO `poster_download` (`id`, `poster_id`, `downloader_id`, `donwload_sts
 (1, 2, 3, 1, '/rythm/assets/postime22.jpg', '2024-02-21'),
 (70, 4, 3, 1, '/rythm/assets/postimg1.jpg', '2024-08-05'),
 (71, 6, 3, 1, '', '2024-08-05'),
-(72, 1, 3, 1, '', '2024-09-04');
+(72, 1, 3, 1, '', '2024-09-04'),
+(77, 52, 29, 0, '', '2026-04-09'),
+(78, 50, 29, 1, '', '2026-04-09'),
+(79, 53, 29, 1, '', '2026-04-09'),
+(80, 53, 46, 1, '', '2026-04-09'),
+(81, 44, 46, 1, '', '2026-04-09');
 
 -- --------------------------------------------------------
 
@@ -720,15 +746,31 @@ CREATE TABLE `profile_details` (
 --
 
 INSERT INTO `profile_details` (`id`, `rolemaster_id`, `about`, `facebook`, `twitter`, `instagram`, `youtube`, `imagevedioprotfloio`, `title_1`, `title_2`, `title_3`, `title_4`, `title_5`, `title_6`, `title_7`, `title_8`, `title_9`, `title_10`, `year_1`, `year_2`, `year_3`, `year_4`, `year_5`, `year_6`, `year_7`, `year_8`, `year_9`, `year_10`, `awardedby_1`, `awardedby_2`, `awardedby_3`, `awardedby_4`, `awardedby_5`, `awardedby_6`, `awardedby_7`, `awardedby_8`, `awardedby_9`, `awardedby_10`, `description_1`, `description_2`, `description_3`, `description_4`, `description_5`, `description_6`, `description_7`, `description_8`, `description_9`, `description_10`, `image_1`, `image_2`, `image_3`, `image_4`, `image_5`, `image_6`, `image_7`, `image_8`, `image_9`, `image_10`, `youtubeLink_1`, `youtubeLink_2`, `youtubeLink_3`, `youtubeLink_4`, `youtubeLink_5`, `youtubeLink_6`, `youtubeLink_7`, `youtubeLink_8`, `youtubeLink_9`, `youtubeLink_10`, `pjtitle_1`, `pjtitle_2`, `pjtitle_3`, `pjtitle_4`, `pjtitle_5`, `pjtitle_6`, `pjtitle_7`, `pjtitle_8`, `pjtitle_9`, `pjtitle_10`, `link_1_1`, `link_1_2`, `link_1_3`, `link_1_4`, `link_1_5`, `link_2_1`, `link_2_2`, `link_2_3`, `link_2_4`, `link_2_5`, `link_3_1`, `link_3_2`, `link_3_3`, `link_3_4`, `link_3_5`, `link_4_1`, `link_4_2`, `link_4_3`, `link_4_4`, `link_4_5`, `link_5_1`, `link_5_2`, `link_5_3`, `link_5_4`, `link_5_5`, `link_6_1`, `link_6_2`, `link_6_3`, `link_6_4`, `link_6_5`, `link_7_1`, `link_7_2`, `link_7_3`, `link_7_4`, `link_7_5`, `link_8_1`, `link_8_2`, `link_8_3`, `link_8_4`, `link_8_5`, `link_9_1`, `link_9_2`, `link_9_3`, `link_9_4`, `link_9_5`, `link_10_1`, `link_10_2`, `link_10_3`, `link_10_4`, `link_10_5`, `created_by`, `created_on`, `admin_status`) VALUES
-(34, 2, 'ASDFGHUJI', 'www/facebook.com', 'www/twitter.com', 'www/instagram.com', 'www/youtube.com', '/wamp62/www/rythm/portfolio/switch.png', '', 'dasdsad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '2023', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', 'youtube', '', '', '', '', '', '', '', '', '', 'ertyhuj', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www/award2.com', '', '', '', '', '', '', '', '', '', 'bbluebase', NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', 'www/link21.in', 'www/link22.in', 'www/link23.in', 'www/link24.in', 'www/link25.in', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2', '2024-03-05', 0),
-(36, 5, 'nothing', 'www/facebook.in', 'www/twitter.in', 'www/instagram.in', 'www/youtube.in', '/wamp62/www/rythm/portfolio/module_table_top.png', 'vv', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', 'dd', '', '', '', '', '', '', '', '', '', 'cc', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www/youtubesss.in', '', '', '', '', '', '', '', '', '', 'bb', NULL, NULL, NULL, NULL, '', '', '', '', '', 'sdfghjkl', 'wertyuio', 'mnbvfd', 'poiuyt', 'asdfgh', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '2024-11-05', 1),
-(35, 2, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2', '2024-08-05', 0),
-(37, 7, 'xxx', 'www/facebook.in', 'www/twitter.in', 'www/instagram.in', 'www/youtube.in', '/wamp62/www/rythm/portfolio/icons8-user-64.png', 'vv', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', 'good', '', '', '', '', '', '', '', '', '', 'dfghjk', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www/youtubesss.in', '', '', '', '', '', '', '', '', '', 'bb', NULL, NULL, NULL, NULL, '', '', '', '', '', 'oooooooo', 'hhhhhhhhhh', 'bbbbbbbbbbb', 'qqqqqqqq', 'xxxxxxxxxxxxxx', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '7', '2024-11-05', 0),
-(38, 1, 'NIL', '', '', '', '', '/wamp62/www/rythm/portfolio/bluebaseLogo1.jpeg', 'super singer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', 'hhhh', '', '', '', '', '', '', '', '', '', 'ddddd', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www.youtube.com', '', '', '', '', '', '', '', '', '', 'aaaaa', NULL, NULL, NULL, NULL, '', '', '', '', '', 'sss', 'ffff', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '2024-12-28', 1),
-(39, 0, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2025-04-01', 1),
-(40, 1, 'song event', 'www.facebook.com', 'www.twitter.com', 'www.instagram.com', 'www.youtube.com', '/wamp62/www/rythm/portfolio/v3.mp4', 'super singer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', 'hhhh', '', '', '', '', '', '', '', '', '', 'ddddd', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www.youtube.com', '', '', '', '', '', '', '', '', '', 'aaaaa', NULL, NULL, NULL, NULL, '', '', '', '', '', 'sss', 'ffff', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '2025-04-01', 1),
-(41, 8, 'jjjj', 'www.facebook.com', 'www.twitter.com', 'www.instagram.com', 'www.youtube.com', '/wamp62/www/rythm/portfolio/profile.png', 'super singer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', 'hhhh', '', '', '', '', '', '', '', '', '', 'hhhhhhhh', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www.youtube.com', '', '', '', '', '', '', '', '', '', 'oooo', NULL, NULL, NULL, NULL, '', '', '', '', '', 'sss', 'ffff', 'rrrrrrk', 'tttttttttt', 'lllllllll', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2025-04-01', 1),
-(42, 8, 'kkkk', 'www.facebook.com', 'www.twitter.com', 'www.instagram.com', 'www.youtube.com', '/wamp62/www/rythm/portfolio/defultuserprofile.png', 'super singer', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', 'hhhh', '', '', '', '', '', '', '', '', '', 'hhhhhhhh', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www.youtube.com', '', '', '', '', '', '', '', '', '', 'oooo', NULL, NULL, NULL, NULL, '', '', '', '', '', 'sss', 'ffff', 'rrrrrrk', 'tttttttttt', 'lllllllll', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2025-04-02', 0);
+(34, 2, 'ASDFGHUJI', 'www/facebook.com', 'www/twitter.com', 'www/instagram.com', 'www/youtube.com', '/wamp62/www/rythm/portfolio/switch.png', '', 'dasdsad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '2023', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', 'youtube', '', '', '', '', '', '', '', '', '', 'ertyhuj', '', '', '', '', '', '', '', '', '', '/wamp62/www/rythm/ac', '', '', '', '', '', '', '', '', '', 'www/award2.com', '', '', '', '', '', '', '', '', '', 'bbluebase', NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', 'www/link21.in', 'www/link22.in', 'www/link23.in', 'www/link24.in', 'www/link25.in', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2', '2024-03-05', 1),
+(36, 5, 'nothing', 'www/facebook.in', 'www/twitter.in', 'www/instagram.in', 'www/youtube.in', '/wamp62/www/rythm/portfolio/module_table_top.png', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '2024-11-05', 1),
+(50, 6, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '6', '2025-07-04', 0),
+(35, 2, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2', '2024-08-05', 1),
+(37, 7, 'xxx', 'www/facebook.in', 'www/twitter.in', 'www/instagram.in', 'www/youtube.in', '/wamp62/www/rythm/portfolio/icons8-user-64.png', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '7', '2024-11-05', 1),
+(52, 8, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2025-08-20', 1),
+(38, 1, 'NIL', '', '', '', '', '/wamp62/www/rythm/portfolio/bluebaseLogo1.jpeg', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '2024-12-28', 1),
+(46, 3, 'Test', 'www/facebook.com', 'www/twitter.com', 'www/instagram.com', 'www/youtube.com', '/wamp62/www/rythm/portfolio/pngtree-man-avatar-image-for-profile-png-image_13001882.png', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '3', '2025-06-13', 0),
+(40, 1, 'song event', 'www.facebook.com', 'www.twitter.com', 'www.instagram.com', 'www.youtube.com', '/wamp62/www/rythm/portfolio/v3.mp4', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '2025-04-01', 1),
+(45, 8, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2025-06-11', 1),
+(41, 8, 'jjjj', 'www.facebook.com', 'www.twitter.com', 'www.instagram.com', 'www.youtube.com', '/wamp62/www/rythm/portfolio/profile.png', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2025-04-01', 1),
+(42, 8, 'kkkk', 'www.facebook.com', 'www.twitter.com', 'www.instagram.com', 'www.youtube.com', '/wamp62/www/rythm/portfolio/defultuserprofile.png', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2025-04-02', 1),
+(44, 1, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1', '2025-05-29', 1),
+(43, 8, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2025-05-05', 1),
+(49, 5, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '5', '2025-07-04', 0),
+(47, 4, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '4', '2025-07-04', 1),
+(48, 3, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '3', '2025-07-04', 0),
+(51, 7, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '7', '2025-07-04', 0),
+(53, 8, 'testing', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2026-04-06', 1),
+(54, 8, 'testing', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2026-04-06', 1),
+(55, 8, 'testing', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2026-04-06', 1),
+(56, 8, 'testing', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2026-04-06', 1),
+(57, 8, 'testing ', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2026-04-06', 1),
+(58, 46, 'testing the profile', '', '', '', '', '../portfolio/HUSTLE.png.jfif', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '46', '2026-04-09', 1),
+(59, 47, 'user panel ', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '47', '2026-04-09', 1);
 
 -- --------------------------------------------------------
 
@@ -751,7 +793,7 @@ CREATE TABLE `profile_photo_uploaded` (
 --
 
 INSERT INTO `profile_photo_uploaded` (`id`, `rolemaster_id`, `photo_path`, `created_on`, `created_by`, `admin_status`, `profilepic_reason`) VALUES
-(7, 3, '/rythm/profile_photos/profile.png', '2024-03-07', 'rythmwoods@gmail.in', 0, '');
+(7, 3, '/rythm/profile_photos/profile.png', '2024-03-07', 'rythmwoods@gmail.in', 1, '');
 
 -- --------------------------------------------------------
 
@@ -960,21 +1002,25 @@ CREATE TABLE `user_master` (
 --
 
 INSERT INTO `user_master` (`id`, `users_id`, `role_master_id`, `name`, `profile_img`, `last_name`, `user_name`, `password`, `email`, `title`, `gender`, `date_of_birth`, `experience`, `tamil`, `malayalam`, `hindi`, `status`, `location`, `followsts`, `mobile_no`, `admin_status`, `reason`, `profile_update_status`, `profilepic_reason`, `created_on`, `modified_on`) VALUES
-(1, 1, 1, 'Janani', '', 'G', 'nehagirish', '8ace0553f2e5cbc047b699cbb260cf64', 'gkjanani89@gmail.com', 'singer', 'Female', '11-10-2010', NULL, NULL, NULL, NULL, '0', 'chennai', 0, '9789957518', 1, 'kkkkk', 1, '', '2023-02-03 12:40:20', NULL),
-(9, 2, 2, 'blue', '/rythm/assets/bluebaselogooooooo.png', 'base', 'bluebase', 'cd84d683cc5612c69efe115c80d0b7dc', 'bluebase@gamil.in', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '8675746545', 0, '', 1, '', '2024-01-19 16:33:25', ''),
-(10, 3, 3, 'rythm', '/rythm/assets/rsz_logo2.png', 'woods', 'rythmwoods', 'cd84d683cc5612c69efe115c80d0b7dc', 'rythmwoods@gmail.in', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'coimbatoure', 1, '8675746545', 1, '', 1, '', '2024-01-19 16:33:25', ''),
-(15, 4, 4, 'blue', '', 'base', 'Edward', '1b0fefa4fa04589f42683fe07be13d32', 'bluebase@gamil.in', 'amateur singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '8675746545', 0, '', 1, '', '2024-08-05 10:03:53', ''),
-(16, 5, 5, 'Neha Girish', '', 'jjj', 'Rajeshwari', '25d55ad283aa400af464c76d713c07ad', 'singernehag@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'chennai', 0, '997865453', 1, '', 1, '', '2024-09-04 14:16:31', ''),
-(17, 6, 6, 'Neha Girish', '', 'kkkk', 'Janani', 'cd84d683cc5612c69efe115c80d0b7dc', 'singernehag@gmail.com', 'fff', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'chennai', 0, '997865453', 1, '', 1, '', '2024-11-05 10:49:19', ''),
-(18, 7, 7, 'priya', '', 'devi', 'priya', '9ea3a32e582d2514cf7d19032c90e4ae', 'priyadevi@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'erode', 0, '8676564534', 1, '', 1, '', '2024-11-05 15:13:16', ''),
-(19, 8, 8, 'ishu', '\\rythm\\assets\\rythmlogo.png', 'r', 'test1', 'cd84d683cc5612c69efe115c80d0b7dc', 'ishu@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '1234567890', 1, '', 1, '', '2024-11-08 09:35:53', ''),
-(20, 1, 1, 'Janani', '', 'G', 'Janani', 'b946ed3f26085850b45808af967075e7', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'chennai', 0, '9789957518', 0, '', 1, '', '2024-12-27 07:38:46', ''),
-(21, 1, 1, 'Janani', '', 'G', 'neha', 'e10adc3949ba59abbe56e057f20f883e', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'chennai', 0, '9789957518', 0, '', 1, '', '2025-04-01 19:20:55', ''),
-(22, 8, 8, 'ishu', '', 'r', 'neha', 'e10adc3949ba59abbe56e057f20f883e', 'ishu@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '1234567890', 0, '', 1, '', '2025-04-01 19:56:21', ''),
-(23, 8, 8, 'ishu', '', 'r', 'neha', 'e10adc3949ba59abbe56e057f20f883e', 'ishu@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '1234567890', 0, '', 1, '', '2025-04-01 19:56:22', ''),
-(24, 8, 8, 'ishu', '', 'r', 'neha', '74d36c0725346b3b3d0d30cbe0edd219', 'ishu@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '1234567890', 0, '', 1, '', '2025-04-02 12:48:01', ''),
-(25, 8, 8, 'ishu', '', 'r', 'neha', '74d36c0725346b3b3d0d30cbe0edd219', 'ishu@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '1234567890', 0, '', 1, '', '2025-04-02 12:48:01', ''),
-(27, 8, 8, 'ishu', '', 'r', 'ishu', 'e10adc3949ba59abbe56e057f20f883e', 'ishu@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '1234567890', 0, '', 1, '', '2025-04-02 14:09:05', '');
+(1, 1, 1, 'Janani', '', 'G', 'nehagirish', '8ace0553f2e5cbc047b699cbb260cf64', 'gkjanani89@gmail.com', 'singer', 'Female', '11-10-2010', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 1, 'kkkkk', 1, '', '2023-02-03 12:40:20', NULL),
+(9, 2, 2, 'blue', '/rythm/assets/bluebaselogooooooo.png', 'base', 'bluebase', 'cd84d683cc5612c69efe115c80d0b7dc', 'bluebase@gamil.in', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '8675746545', 1, 'test', 1, '', '2024-01-19 16:33:25', ''),
+(10, 3, 3, 'musician', '/rythm/assets/rsz_logo2.png', 'Test', 'rythmwoods', '827ccb0eea8a706c4c34a16891f84e7b', 'musician@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '9874512360', 1, '', 1, '', '2024-01-19 16:33:25', ''),
+(15, 4, 4, 'Ranjith', '', 'Kumar', 'Edward', '1b0fefa4fa04589f42683fe07be13d32', 'ranjith@gmail.com', 'amateur singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '8675746545', 1, '', 1, '', '2024-08-05 10:03:53', ''),
+(16, 5, 5, 'Event', '', 'Manager', 'Rajeshwari', '25d55ad283aa400af464c76d713c07ad', 'eventmanager@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6874591230', 1, '', 1, '', '2024-09-04 14:16:31', ''),
+(17, 6, 6, 'Lighting', '', 'Test', 'Janani', 'cd84d683cc5612c69efe115c80d0b7dc', 'lighting@gmail.com', 'fff', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6987451023', 1, '', 1, '', '2024-11-05 10:49:19', ''),
+(18, 7, 7, 'Sound', '', 'Test', 'priya', '9ea3a32e582d2514cf7d19032c90e4ae', 'sound@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9874512362', 1, '', 1, '', '2024-11-05 15:13:16', ''),
+(19, 8, 8, 'surya', '\\rythm\\assets\\rythmlogo.png', 'p', 'test1', 'cd84d683cc5612c69efe115c80d0b7dc', 'suryapanneer@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'chennai', 1, '7474488444', 1, '', 1, '', '2024-11-08 09:35:53', ''),
+(20, 1, 1, 'Janani', '', 'G', 'nehagirish', 'b946ed3f26085850b45808af967075e7', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 0, '', 1, '', '2024-12-27 07:38:46', ''),
+(21, 1, 1, 'Janani', '', 'G', 'nehagirish', 'e10adc3949ba59abbe56e057f20f883e', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 0, '', 1, '', '2025-04-01 19:20:55', ''),
+(29, 1, 1, 'Janani', '', 'G', 'nehagirish', '827ccb0eea8a706c4c34a16891f84e7b', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 1, '', 1, '', '2025-05-29 14:13:18', ''),
+(32, 4, 4, 'Ranjith', '', 'Kumar', 'Ranjith', '827ccb0eea8a706c4c34a16891f84e7b', 'ranjith@gmail.com', 'bands', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '8675746545', 1, '', 1, '', '2025-06-16 10:31:10', ''),
+(33, 3, 3, 'musician', '', 'Test', 'musician', '827ccb0eea8a706c4c34a16891f84e7b', 'musician@gmail.com', 'musician', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9874512360', 1, '', 1, '', '2025-07-04 10:23:45', ''),
+(34, 5, 5, 'Event', '', 'Manager', 'Event', '827ccb0eea8a706c4c34a16891f84e7b', 'eventmanager@gmail.com', 'event managers', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6874591230', 1, '', 1, '', '2025-07-04 10:27:37', ''),
+(35, 6, 6, 'Lighting', '', 'Test', 'Lighting', '827ccb0eea8a706c4c34a16891f84e7b', 'lighting@gmail.com', 'lighting', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6987451023', 1, '', 1, '', '2025-07-04 10:31:58', ''),
+(36, 7, 7, 'Sound', '', 'Test', 'Sound', '827ccb0eea8a706c4c34a16891f84e7b', 'sound@gmail.com', 'sounds', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9874512362', 1, '', 1, '', '2025-07-04 10:35:28', ''),
+(42, 1, 1, 'Janani', '', 'User', 'nehagirish', '482c811da5d5b4bc6d497ffa98491e38', 'test@test.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 0, '', 0, '', '2026-04-07 15:57:15', ''),
+(46, 46, 1, 'surya', '', 'p', 'surya', '827ccb0eea8a706c4c34a16891f84e7b', 'suryapanneer04@gmail.com', 'singer', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'chennai', 0, '9384178442', 1, '', 1, '', '2026-04-09 10:35:21', NULL),
+(47, 8, 8, 'surya', '', 'p', 'surya', '039c4ed9e206009a7875ff7251a67205', 'surya@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'chennai', 0, '9384178442', 1, '', 1, '', '2026-04-09 14:38:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -1185,7 +1231,7 @@ ALTER TABLE `admin_login`
 -- AUTO_INCREMENT for table `daily_event`
 --
 ALTER TABLE `daily_event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `daily_task`
@@ -1197,7 +1243,7 @@ ALTER TABLE `daily_task`
 -- AUTO_INCREMENT for table `following_details`
 --
 ALTER TABLE `following_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT for table `forgot_password`
@@ -1263,19 +1309,19 @@ ALTER TABLE `otptable`
 -- AUTO_INCREMENT for table `posters`
 --
 ALTER TABLE `posters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `posters_commads`
 --
 ALTER TABLE `posters_commads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `poster_download`
 --
 ALTER TABLE `poster_download`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -1287,7 +1333,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `profile_details`
 --
 ALTER TABLE `profile_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `profile_photo_uploaded`
@@ -1341,7 +1387,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_master`
 --
 ALTER TABLE `user_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `verification_requests`

@@ -4,7 +4,7 @@ session_start();
 require("connect.php");
 
 $username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 
 $sql2 = $con->query("SELECT * FROM `user_master` where role_master_id='$rolemaster_id' and admin_status=0");
 

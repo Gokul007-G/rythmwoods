@@ -6,7 +6,7 @@ include("connect.php");
 
 
 $username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

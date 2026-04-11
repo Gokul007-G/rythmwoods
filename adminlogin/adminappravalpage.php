@@ -38,7 +38,7 @@ require("connect.php");
                     <tbody>
                         <?php
                         $username = $_SESSION['username'];
-                        $rolemaster_id = $_SESSION['rolemaster_id'];
+                        $rolemaster_id = $_SESSION['role_master_id'];
                         $sql2 = $con->query("SELECT * FROM `profile_details`");
                         $inc = 0;
                         while ($profiledtils = $sql2->fetch(PDO::FETCH_ASSOC)) {

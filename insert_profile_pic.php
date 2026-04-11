@@ -3,7 +3,7 @@ session_start();
 require("connect.php"); 
 
 $username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 
 // Directory where uploaded files will be saved
 $uploadDir = '/wamp62/www/rythm/profile_photos/';

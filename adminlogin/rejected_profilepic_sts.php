@@ -4,7 +4,7 @@ session_start();
 require("connect.php");	
 
 $username = $_SESSION['username'];
- $rolemaster_id = $_SESSION['rolemaster_id'];
+ $rolemaster_id = $_SESSION['role_master_id'];
  
 $id=$_REQUEST['id'];
 $reason=$_REQUEST['reason'];

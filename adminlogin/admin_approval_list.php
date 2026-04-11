@@ -38,7 +38,7 @@ require("connect.php");
                     <tbody>
                         <?php
                         $username = $_SESSION['username'];
-                        $rolemaster_id = $_SESSION['rolemaster_id'];
+                        $rolemaster_id = $_SESSION['role_master_id'];
                         $inc = 0;
                         $sql1 = $con->query("SELECT * FROM `user_master` WHERE profile_update_status=1 AND admin_status=1");
                         while ($getuserdetails = $sql1->fetch(PDO::FETCH_ASSOC)) {

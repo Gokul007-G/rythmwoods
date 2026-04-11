@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $pageTitle = "Rythm - Profile";
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 $username = $_SESSION['username'];
 
 // Fetch User Profile Data

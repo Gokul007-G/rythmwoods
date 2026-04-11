@@ -10,6 +10,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+
+
 $users_id = $_SESSION['users_id'];
 $username = $_SESSION['username'];
 
@@ -24,9 +26,34 @@ $post_count_stmt->execute([$users_id]);
 $total_posts = $post_count_stmt->fetchColumn();
 
 // Fetch Following Count
-$following_stmt = $con->prepare("SELECT SUM(user_id) FROM `following_details` WHERE role_master_id = ? AND following_sts = '1'");
+$following_stmt = $con->prepare("SELECT COUNT(*) FROM `following_details` WHERE role_master_id = ? AND following_sts = '1'");
 $following_stmt->execute([$users_id]);
 $following_count = intval($following_stmt->fetchColumn());
+
+// Handle Profile Image Upload
+if(isset($_FILES['profile_img']) && $_FILES['profile_img']['error'] === 0){
+
+    $tmp_name = $_FILES['profile_img']['tmp_name'];
+
+    $ext = strtolower(pathinfo($_FILES['profile_img']['name'], PATHINFO_EXTENSION));
+    $new_name = time().".".$ext;
+
+    $upload_dir = __DIR__."/uploads/profile/";
+    $upload_path = $upload_dir.$new_name;
+
+    if(!is_dir($upload_dir)){
+        mkdir($upload_dir,0777,true);
+    }
+
+    if(move_uploaded_file($tmp_name,$upload_path)){
+
+        $stmt = $con->prepare("UPDATE user_master SET profile_img=? WHERE id=?");
+        $stmt->execute(["uploads/profile/".$new_name,$users_id]);
+
+        header("Location: profile.php");
+        exit();
+    }
+}
 
 $pageTitle = "Rythm - @$username";
 include("includes/header.php");
@@ -35,8 +62,15 @@ include("includes/header.php");
 <div class="profile-container p-4">
     <header class="d-flex align-items-center mb-5 gap-5">
         <div class="profile-pic-lg position-relative">
-            <img src="<?php echo !empty($user_data['profile_img']) ? $user_data['profile_img'] : '/rythm/assets/profile.png'; ?>" 
-                 alt="Profile" class="rounded-circle border border-2" style="width: 150px; height: 150px; object-fit: cover;">
+            <form method="POST" enctype="multipart/form-data" style="display:inline;">
+                <input type="file" name="profile_img" id="profileInput" hidden onchange="this.form.submit()">
+                
+                <label for="profileInput" style="cursor:pointer;">
+                    <img src="<?php echo !empty($user_data['profile_img']) ? $user_data['profile_img'] : '/rythm/assets/profile.png'; ?>" 
+                        class="rounded-circle border border-2"
+                        style="width:150px;height:150px;object-fit:cover;">
+                </label>
+            </form>
         </div>
         <div class="profile-meta">
             <div class="d-flex align-items-center gap-4 mb-3">

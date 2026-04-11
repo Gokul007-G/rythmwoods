@@ -31,7 +31,7 @@
     <div class="form-group">
       <label>Select category</label>
       <select class="login-form-card input" id="typeofcategory" name="typeofcategory" style="background: #fdfdfd; border: 1px solid #ddd; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 15px;">
-        <option value="nd" disabled selected>-- Select Category --</option>
+        <option value="" disabled selected>-- Select Category --</option>
         <option value="1">Singer</option>
         <option value="3">Musician</option>
         <option value="4">Band</option>

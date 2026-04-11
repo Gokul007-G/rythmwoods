@@ -3,7 +3,7 @@ session_start();
 require("connect.php");
 
 $username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 $id = $_REQUEST['id'];
 
 $stmt = $con->prepare("SELECT * FROM user_master WHERE id = ?");

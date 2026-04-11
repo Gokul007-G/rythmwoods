@@ -184,7 +184,7 @@ session_start();
 require("connect.php"); 
 
 $username = $_SESSION['username'];
- $rolemaster_id = $_SESSION['rolemaster_id'];
+ $rolemaster_id = $_SESSION['role_master_id'];
  
  
 $folowelist=$con->query("SELECT * FROM `user_master` where role_master_id='$rolemaster_id'");

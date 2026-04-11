@@ -5,7 +5,7 @@ include("connect.php");
 //include("user.php");
 
 $username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 //echo "hiiiiiii";
 
  $post_id=$_REQUEST['post_id'];

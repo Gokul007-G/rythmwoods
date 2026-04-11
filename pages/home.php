@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
 
 $pageTitle = "Rythm - Home";
 $profile_name = $_SESSION['user_name'];
-$rolemaster_id = $_SESSION['rolemaster_id'];
+$rolemaster_id = $_SESSION['role_master_id'];
 
 include("../includes/header.php");
 ?>
