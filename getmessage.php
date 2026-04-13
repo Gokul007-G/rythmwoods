@@ -1,17 +1,43 @@
 <?php
-include 'connect.php';
+session_start();
+include("includes/config.php");
 
-$sender_id = $_GET['sender_id'];
-$receiver_id = $_GET['receiver_id'];
+if(!isset($_SESSION['users_id'])){
+    exit("unauthorized");
+}
 
-$sql = "SELECT * FROM messages 
-        WHERE (sender_id = :sender_id AND receiver_id = :receiver_id) 
-        OR (sender_id = :receiver_id AND receiver_id = :sender_id)
-        ORDER BY timestamp ASC";
+$sender = $_SESSION['users_id'];
+$receiver = $_POST['user_id'] ?? 0;
 
-$stmt = $con->prepare($sql);
-$stmt->execute(['sender_id' => $sender_id, 'receiver_id' => $receiver_id]);
-$messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if($receiver == 0){
+    exit;
+}
 
-echo json_encode($messages);
+$stmt = $con->prepare("
+    SELECT * FROM messages 
+    WHERE (sender_id=? AND receiver_id=?)
+    OR (sender_id=? AND receiver_id=?)
+    ORDER BY id ASC
+");
+
+$stmt->execute([$sender,$receiver,$receiver,$sender]);
+
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+
+    $msg = htmlspecialchars($row['message'], ENT_QUOTES, 'UTF-8');
+
+    if($row['sender_id'] == $sender){
+        echo "<div style='text-align:right'>
+                <p style='background:#0084ff;color:#fff;display:inline-block;padding:8px;border-radius:10px;'>
+                ".$msg."
+                </p>
+              </div>";
+    } else {
+        echo "<div>
+                <p style='background:#eee;padding:8px;border-radius:10px;display:inline-block;'>
+                ".$msg."
+                </p>
+              </div>";
+    }
+}
 ?>

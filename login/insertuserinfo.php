@@ -15,6 +15,7 @@ $selectedValue  = $_POST['typeofcategory'];
 $checkStmt = $con->prepare("SELECT id FROM user_master WHERE email = ?");
 $checkStmt->execute([$email]);
 
+
 if ($checkStmt->rowCount() > 0) {
     echo "<script>alert('Already you have an account. Please use another email!')</script>";
     echo "<script>window.location.href='/rythm/login/login.php'</script>";
@@ -49,11 +50,10 @@ if (
         $otp = rand(100000,999999); // OTP
 
         $stmt = $con->prepare("INSERT INTO user_master 
-        (users_id, role_master_id, name, last_name, user_name, password, email, title, status, mobile_no, created_on, otp, is_verified) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, '1', ?, NOW(), ?, 0)");
+        (role_master_id, name, last_name, user_name, password, email, title, status, mobile_no, created_on, otp, is_verified) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, '1', ?, NOW(), ?, 0)");
 
         $success = $stmt->execute([
-            $selectedValue,
             $selectedValue,
             $Inputfirstname,
             $Inputlastname,
@@ -65,7 +65,12 @@ if (
             $otp
         ]);
 
+    
         if ($success) {
+
+            $last_id = $con->lastInsertId();
+            $update = $con->prepare("UPDATE user_master SET users_id = ? WHERE id = ?");
+            $update->execute([$last_id, $last_id]);
 
             $msg = "Your OTP is: ".$otp;
             smtp_mailer($email, "Email Verification OTP", $msg);

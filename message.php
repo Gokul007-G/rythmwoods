@@ -1,7 +1,4 @@
 <?php
-/**
- * Rythm Messages - Unified Professional Version
- */
 session_start();
 require_once("includes/config.php");
 
@@ -10,71 +7,166 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$pageTitle = "Rythm - Messages";
+$login_user_id = $_SESSION['users_id'];
+
 include("includes/header.php");
 ?>
 
-<link rel="stylesheet" href="/rythm/assets/css/message.css">
+<div class="container-fluid" style="height:90vh;">
+<div class="row h-100">
 
-<div class="messenger-wrapper container-fluid p-0" style="height: calc(100vh - 120px); border-radius: 12px; overflow: hidden; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-    <div class="row g-0 h-100">
-        <!-- Sidebar: User List -->
-        <div class="col-md-4 border-end h-100 d-flex flex-column">
-            <div class="p-3 border-bottom">
-                <h4 class="mb-3 fw-bold">Messages</h4>
-                <div class="search-box">
-                    <input type="text" id="userSearch" class="form-control rounded-pill bg-light border-0 px-3" placeholder="Search people...">
-                </div>
-            </div>
-            <div class="flex-grow-1 overflow-auto" id="userList">
-                <!-- User Item -->
-                <div class="user-item p-3 d-flex align-items-center gap-3 border-bottom cursor-pointer hover-bg-light"
-                        onclick="loadChat(123, 'Lion', '/rythm/assets/lion.png', this)">
-                    <img src="/rythm/assets/lion.png" alt="User" class="rounded-circle border" style="width: 50px; height: 50px; object-fit: cover;">
-                    <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-0 fw-bold username">Lion</h6>
-                            <small class="text-muted">12:45 PM</small>
-                        </div>
-                        <p class="small text-muted mb-0 text-truncate">Hey! How are you?</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- USER LIST -->
+<div class="col-md-4 border-end overflow-auto">
 
-        <!-- Main: Chat Window -->
-       <div class="col-md-8 h-100 d-flex flex-column bg-light bg-opacity-25">
+<h5 class="p-3">Messages</h5>
 
-            <header class="p-3 border-bottom bg-white d-flex align-items-center gap-3">
-                <img src="/rythm/assets/lion.png" id="chatHeaderImg"
-                    class="rounded-circle border" style="width: 40px; height: 40px;">
-                <h6 class="mb-0 fw-bold" id="chatHeaderName">Lion</h6>
-            </header>
+<?php
+$stmt = $con->prepare("
+    SELECT 
+        u.users_id,
+        u.user_name,
+        u.profile_img,
+        (
+            SELECT message FROM messages m1
+            WHERE (m1.sender_id=u.users_id AND m1.receiver_id=?)
+               OR (m1.sender_id=? AND m1.receiver_id=u.users_id)
+            ORDER BY id DESC LIMIT 1
+        ) AS message,
+        (
+            SELECT timestamp FROM messages m2
+            WHERE (m2.sender_id=u.users_id AND m2.receiver_id=?)
+               OR (m2.sender_id=? AND m2.receiver_id=u.users_id)
+            ORDER BY id DESC LIMIT 1
+        ) AS time
+    FROM user_master u
+    INNER JOIN following_details f 
+        ON u.users_id = f.following_id
+    WHERE f.follower_id = ? 
+      AND f.following_sts = 1
+    ORDER BY time DESC
+");
 
-            <div class="flex-grow-1 p-4 overflow-auto d-flex flex-column gap-3" id="chatMessages">
-                <div class="text-center text-muted small my-5 py-5">
-                    <img src="/rythm/assets/send.png" class="opacity-25 mb-3" style="width: 80px;">
-                    <p>Select a friend from the list to start a conversation.</p>
-                </div>
-            </div>
+$stmt->execute([
+    $login_user_id,
+    $login_user_id,
+    $login_user_id,
+    $login_user_id,
+    $login_user_id
+]);
 
-            <footer class="p-3 bg-white border-top">
-                <form id="messageForm" class="d-flex gap-2 align-items-center">
-                    <input type="text" id="messageInput"
-                        class="form-control rounded-pill border-0 bg-light px-4"
-                        placeholder="Type a message..." style="height:45px;">
+while($user=$stmt->fetch(PDO::FETCH_ASSOC)):
 
-                    <button type="submit"
-                            class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center"
-                            style="width:45px;height:45px;background:#0084ff;border:none;">
-                        <img src="/rythm/assets/send.png" style="width:18px;filter:invert(1);">
-                    </button>
-                </form>
-            </footer>
+$img = !empty($user['profile_img']) ? $user['profile_img'] : '/rythm/assets/profile.png';
+$msg = !empty($user['message']) ? $user['message'] : 'Start chatting...';
 
-        </div>
-    </div>
+?>
+
+<div class="p-3 border-bottom cursor-pointer" style="cursor:pointer;"
+onclick="loadChat('<?php echo $user['users_id']; ?>',
+'<?php echo htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8'); ?>',
+'<?php echo $img; ?>') ">
+
+<img src="<?php echo $img; ?>" width="40" class="rounded-circle border profile-img">
+<strong><?php echo htmlspecialchars($user['user_name'], ENT_QUOTES, 'UTF-8'); ?></strong><br>
+<small><?php echo htmlspecialchars($msg, ENT_QUOTES, 'UTF-8'); ?></small>
+
 </div>
 
-<script src="/rythm/assets/js/message.js"></script>
+<?php endwhile; ?>
+
+</div>
+
+<!-- CHAT -->
+<div class="col-md-8 d-flex flex-column">
+
+<div id="chatHeader" class="p-3 border-bottom d-flex align-items-center gap-2" style="display:none;">
+<img id="chatImg" src="/rythm/assets/profile.png" width="40" style="display: none;">
+<h6 id="chatName" style="display: none;">Select User</h6>
+<h5 id="chatTitle">Select a user to start chatting</h5>
+</div>
+
+<div id="chatBox" class="flex-grow-1 p-3 overflow-auto"></div>
+
+<form id="sendForm" class="p-3 d-flex gap-2" style="display: none">
+<input type="text" id="msg" class="form-control" style="display: none;">
+<button id="sendBtn" class="btn btn-primary" style="display: none;">Send</button>
+</form>
+
+</div>
+
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+let currentUser = 0;
+
+// LOAD CHAT
+function loadChat(id,name,img){
+    currentUser = id;
+
+    
+    $('#chatName').text(name).show();
+    $('#chatImg').attr('src',img).show();
+    $('#chatHeader').show();
+    $('#sendForm').show();
+    $('#msg').show();
+    $('#sendBtn').show();
+    $('#chatTitle').hide();
+    fetchMessages();
+}
+
+
+
+// FETCH MESSAGES
+function fetchMessages(){
+    if(currentUser == 0) return;
+
+    $.post('getmessage.php',{user_id:currentUser},function(res){
+
+        $('#chatBox').html(res);
+
+        let box = $('#chatBox')[0];
+        box.scrollTop = box.scrollHeight;
+    });
+}
+
+// AUTO REFRESH
+setInterval(() => {
+    if(currentUser != 0){
+        fetchMessages();
+    }
+}, 2000);
+
+// SEND MESSAGE
+$('#sendForm').submit(function(e){
+    e.preventDefault();
+
+    if(currentUser == 0){
+        alert("Select user first");
+        return;
+    }
+
+    let msg = $('#msg').val();
+    if(msg.trim()=='') return;
+
+    $.post('send_message.php',{
+        receiver_id: currentUser,
+        message: msg
+    },function(res){
+        $('#msg').val('');
+        fetchMessages();
+    });
+});
+
+// ENTER KEY
+$('#msg').keypress(function(e){
+    if(e.which==13){
+        e.preventDefault();
+        $('#sendForm').submit();
+    }
+});
+</script>
+
 <?php include("includes/footer.php"); ?>

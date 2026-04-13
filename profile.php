@@ -12,13 +12,17 @@ if (!isset($_SESSION['username'])) {
 
 
 
-$users_id = $_SESSION['users_id'];
+$users_id = $_SESSION['users_id']; 
 $username = $_SESSION['username'];
 
 // Fetch User Data
-$user_stmt = $con->prepare("SELECT * FROM `user_master` WHERE id = ?");
+$user_stmt = $con->prepare("SELECT * FROM user_master WHERE users_id = ?");
 $user_stmt->execute([$users_id]);
 $user_data = $user_stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user_data) {
+    die("User not found - check users_id session or DB");
+}
 
 // Fetch Post Counts
 $post_count_stmt = $con->prepare("SELECT COUNT(*) FROM posters WHERE username_id = ?");
@@ -26,9 +30,22 @@ $post_count_stmt->execute([$users_id]);
 $total_posts = $post_count_stmt->fetchColumn();
 
 // Fetch Following Count
-$following_stmt = $con->prepare("SELECT COUNT(*) FROM `following_details` WHERE role_master_id = ? AND following_sts = '1'");
+$following_stmt = $con->prepare("
+    SELECT COUNT(*) 
+    FROM following_details 
+    WHERE follower_id = ? AND following_sts = 1
+");
 $following_stmt->execute([$users_id]);
 $following_count = intval($following_stmt->fetchColumn());
+
+// fetch followers count
+$followers_stmt = $con->prepare("
+    SELECT COUNT(*) 
+    FROM following_details 
+    WHERE following_id = ? AND following_sts = 1
+");
+$followers_stmt->execute([$users_id]);
+$followers_count = intval($followers_stmt->fetchColumn());
 
 // Handle Profile Image Upload
 if(isset($_FILES['profile_img']) && $_FILES['profile_img']['error'] === 0){
@@ -47,7 +64,7 @@ if(isset($_FILES['profile_img']) && $_FILES['profile_img']['error'] === 0){
 
     if(move_uploaded_file($tmp_name,$upload_path)){
 
-        $stmt = $con->prepare("UPDATE user_master SET profile_img=? WHERE id=?");
+        $stmt = $con->prepare("UPDATE user_master SET profile_img=? WHERE users_id=?");
         $stmt->execute(["uploads/profile/".$new_name,$users_id]);
 
         header("Location: profile.php");
@@ -74,15 +91,15 @@ include("includes/header.php");
         </div>
         <div class="profile-meta">
             <div class="d-flex align-items-center gap-4 mb-3">
-                <h2 class="mb-0 fw-light"><?php echo htmlspecialchars($user_data['user_name']); ?></h2>
+                <h2 class="mb-0 fw-light"><?php echo htmlspecialchars($user_data['user_name'] ?? ''); ?></h2>
                 <button class="btn btn-outline-dark btn-sm rounded-pill px-4" onclick="location.href='/rythm/editprofile.php'">Edit Profile</button>
             </div>
             <div class="d-flex gap-4 mb-3">
                 <span><strong><?php echo $total_posts; ?></strong> posts</span>
-                <span><strong>0</strong> followers</span>
+                <span><strong><?php echo $followers_count; ?></strong> followers</span>
                 <span><strong><?php echo $following_count; ?></strong> following</span>
             </div>
-            <div class="fw-bold"><?php echo htmlspecialchars($user_data['user_name']); ?></div>
+            <div class="fw-bold"><?php echo htmlspecialchars($user_data['user_name'] ?? ''); ?></div>
             <div class="text-muted small">Professional Artist / Musician</div>
         </div>
     </header>

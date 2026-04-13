@@ -39,10 +39,10 @@ include("includes/header.php");
             $postdate = ($numofdays == 0) ? 'Today' : $numofdays . 'd';
             
             // User Profile Image
-            $getprofile = $con->prepare("SELECT profile_img FROM `user_master` WHERE role_master_id=?");
+            $getprofile = $con->prepare("SELECT profile_img FROM `user_master` WHERE id=?");
             $getprofile->execute([$username_id]);
             $profile_img_data = $getprofile->fetch(PDO::FETCH_ASSOC);
-            $profile_pic_url = (!empty($profile_img_data['profile_img'])) ? $profile_img_data['profile_img'] : '/rythm/assets/images/lion.png';
+            $profile_pic_url = (!empty($profile_img_data['profile_img'])) ? $profile_img_data['profile_img'] : '/rythm/assets/lion.png';
             
             // Like Count
             $like_stmt = $con->prepare("SELECT SUM(likestatus) FROM `posters` WHERE id=?");

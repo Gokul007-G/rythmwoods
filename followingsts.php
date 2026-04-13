@@ -1,51 +1,70 @@
 <?php
 session_start();
-
 include("connect.php");
-//include("user.php");
 
-$username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['role_master_id'];
-//echo "hiiiiiii";
+// Logged-in user (UNIQUE ID)
+$follower_id = $_SESSION['users_id'] ?? 0;
 
- $followingsts=$_REQUEST['followingsts'];
- $user_id=$_REQUEST['user_id'];
- 
+// Target user (whom to follow/unfollow)
+$following_id = $_POST['user_id'] ?? 0;
 
-if ($followingsts == 1 && !empty($user_id)) {
-    try {
-        // Check if already following
-        $check = $con->prepare("SELECT id FROM following_details WHERE user_id = ? AND role_master_id = ?");
-        $check->execute([$user_id, $rolemaster_id]);
-        
-        if ($check->rowCount() == 0) {
-            $stmt = $con->prepare("INSERT INTO `following_details` (`user_id`, `role_master_id`, `following_sts`, `created_on`) VALUES (?, ?, '1', CURDATE())");
-            if ($stmt->execute([$user_id, $rolemaster_id])) {
-                // Update user_master to mark as followed (if that's the logic)
-                $con->prepare("UPDATE `user_master` SET `followsts` = '1' WHERE `role_master_id` = ?")->execute([$user_id]);
-                echo 1;
-            } else {
-                echo 0;
-            }
-        } else {
-            // Already following, maybe toggle/unfollow logic if needed, but for now just success
-            echo 1;
-        }
-    } catch (PDOException $e) {
-        echo 0;
-    }
-} else if ($followingsts == 0 && !empty($user_id)) {
-    // Unfollow logic
-    try {
-        $stmt = $con->prepare("DELETE FROM following_details WHERE user_id = ? AND role_master_id = ?");
-        if ($stmt->execute([$user_id, $rolemaster_id])) {
-            echo 1;
-        } else {
-            echo 0;
-        }
-    } catch (PDOException $e) {
-        echo 0;
-    }
+// Action (1 = follow, 0 = unfollow)
+$followingsts = $_POST['followingsts'] ?? '';
+
+if (!$follower_id || !$following_id) {
+    echo 0;
+    exit;
 }
 
+try {
+
+    // ✅ FOLLOW
+    if ($followingsts == 1) {
+
+        // Check if already exists
+        $check = $con->prepare("
+            SELECT id FROM following_details 
+            WHERE follower_id = ? AND following_id = ?
+        ");
+        $check->execute([$follower_id, $following_id]);
+
+        if ($check->rowCount() == 0) {
+
+            // Insert new follow
+            $stmt = $con->prepare("
+                INSERT INTO following_details 
+                (follower_id, following_id, following_sts, created_on) 
+                VALUES (?, ?, 1, NOW())
+            ");
+
+            echo $stmt->execute([$follower_id, $following_id]) ? 1 : 0;
+
+        } else {
+
+            // Already exists → just update status
+            $update = $con->prepare("
+                UPDATE following_details 
+                SET following_sts = 1 
+                WHERE follower_id = ? AND following_id = ?
+            ");
+
+            echo $update->execute([$follower_id, $following_id]) ? 1 : 0;
+        }
+    }
+
+    // ✅ UNFOLLOW
+    if ($followingsts == 0) {
+
+        $stmt = $con->prepare("
+            UPDATE following_details 
+            SET following_sts = 0 
+            WHERE follower_id = ? AND following_id = ?
+        ");
+
+        echo $stmt->execute([$follower_id, $following_id]) ? 1 : 0;
+    }
+
+} catch (PDOException $e) {
+    echo 0;
+}
 ?>

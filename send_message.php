@@ -1,24 +1,25 @@
 <?php
-include 'connect.php';
+session_start();
+include("includes/config.php");
 
-$data = json_decode(file_get_contents("php://input"));
-
-$sender_id = $data->sender_id ?? 0;
-$receiver_id = $data->receiver_id ?? 0;
-$message = $data->message ?? '';
-
-if ($sender_id && $receiver_id && !empty($message)) {
-    try {
-        $stmt = $con->prepare("INSERT INTO messages (sender_id, receiver_id, message) VALUES (?, ?, ?)");
-        if ($stmt->execute([$sender_id, $receiver_id, $message])) {
-            echo json_encode(["status" => "success"]);
-        } else {
-            echo json_encode(["status" => "error", "info" => "Execution failed"]);
-        }
-    } catch (PDOException $e) {
-        echo json_encode(["status" => "error", "message" => $e->getMessage()]);
-    }
-} else {
-    echo json_encode(["status" => "error", "info" => "Invalid input"]);
+if(!isset($_SESSION['users_id'])){
+    exit("unauthorized");
 }
+
+$sender = $_SESSION['users_id'];
+$receiver = $_POST['receiver_id'] ?? 0;
+$message = trim($_POST['message'] ?? '');
+
+if($receiver == 0 || $message == ''){
+    exit;
+}
+
+$stmt = $con->prepare("
+    INSERT INTO messages (sender_id, receiver_id, message, timestamp, is_read)
+    VALUES (?, ?, ?, NOW(), 0)
+");
+
+$stmt->execute([$sender, $receiver, $message]);
+
+echo 1;
 ?>
