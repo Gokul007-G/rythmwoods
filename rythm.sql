@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2026 at 12:51 PM
+-- Generation Time: Apr 17, 2026 at 01:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -176,8 +176,8 @@ INSERT INTO `eventpayment` (`id`, `amount`, `date`, `Received_type`, `eventid`, 
 
 CREATE TABLE `following_details` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `role_master_id` int(11) NOT NULL,
+  `following_id` int(11) DEFAULT NULL,
+  `follower_id` int(11) DEFAULT NULL,
   `following_sts` int(11) NOT NULL,
   `created_on` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -186,12 +186,10 @@ CREATE TABLE `following_details` (
 -- Dumping data for table `following_details`
 --
 
-INSERT INTO `following_details` (`id`, `user_id`, `role_master_id`, `following_sts`, `created_on`) VALUES
-(1, 1, 3, 1, '2024-02-21'),
-(148, 10, 3, 1, '0000-00-00'),
-(149, 15, 3, 1, '0000-00-00'),
-(150, 10, 1, 1, '0000-00-00'),
-(151, 19, 8, 1, '0000-00-00');
+INSERT INTO `following_details` (`id`, `following_id`, `follower_id`, `following_sts`, `created_on`) VALUES
+(170, 54, 58, 1, '2026-04-13'),
+(169, 2, 54, 1, '2026-04-13'),
+(168, 58, 54, 1, '2026-04-13');
 
 -- --------------------------------------------------------
 
@@ -252,7 +250,9 @@ INSERT INTO `languages` (`id`, `language_name`, `language_code`, `singer_type`, 
 (5, 'Sinhala', 'si', '', ''),
 (6, 'English', 'en', '', ''),
 (7, 'Bengali', 'Be', '', ''),
-(11, 'English', '', 'singer', 'active');
+(11, 'English', '', 'singer', 'active'),
+(12, 'Tamil', '', 'Musician', 'active'),
+(13, 'English', '', 'Musician', 'active');
 
 -- --------------------------------------------------------
 
@@ -338,6 +338,16 @@ CREATE TABLE `messages` (
   `is_read` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `sender_id`, `receiver_id`, `message`, `timestamp`, `is_read`) VALUES
+(9, 54, 2, 'how are you', '2026-04-13 15:44:37', 0),
+(10, 54, 58, 'are you there ?', '2026-04-13 15:45:22', 0),
+(11, 58, 54, 'hi', '2026-04-13 15:46:31', 0),
+(12, 58, 54, 'how are you', '2026-04-13 15:46:51', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -408,7 +418,8 @@ INSERT INTO `music_directors` (`id`, `music_director_name`, `singer_type`, `stat
 (10, 'Yuvan Shankar Raja', '', '', 1),
 (11, 'Ilayaraja', 'singer', 'active', 0),
 (12, 'illayaraj', 'singer', 'active', 0),
-(13, 'Janahi', 'singer', 'active', 0);
+(13, 'Janahi', 'singer', 'active', 0),
+(14, 'ANI', 'Musician', 'active', 0);
 
 -- --------------------------------------------------------
 
@@ -494,13 +505,14 @@ INSERT INTO `posters` (`id`, `username`, `username_id`, `poster_id`, `post_type`
 (43, 'rythmwoods', 3, 43, 'video', '', '/rythm/posters/u5.mp4', 'llll', '', NULL, 0, 0, '0000-00-00', 0, 1, '2025-04-16', ''),
 (44, 'rythmwoods', 3, 44, 'video', '', '/rythm/posters/video.mp4.mp4', 'nature view', '', NULL, 2, 0, '0000-00-00', 0, 1, '2025-04-28', ''),
 (45, 'test1', 8, 45, 'image', '/rythm/posters/website.jpg', '', 'Chennai', '', NULL, 1, 0, '0000-00-00', 0, 1, '2025-06-16', ''),
-(46, 'nehagirish', 1, 46, 'image', '/rythm/posters/bird.png', '', 'chennai', 'bird', NULL, 1, 0, '0000-00-00', 1, 1, '2026-04-08', ''),
+(46, 'nehagirish', 1, 46, 'image', '/rythm/posters/bird.png', '', 'chennai', 'bird', NULL, 2, 0, '0000-00-00', 0, 1, '2026-04-08', ''),
 (47, 'nehagirish', 1, 47, 'image', '/rythm/posters/HUSTLE.png.jfif', '', 'No Location', 'Money ', 'money WalfOfWallStreet', 2, 0, '0000-00-00', 1, 1, '2026-04-08', ''),
 (50, 'nehagirish', 29, 50, 'image', '/rythm/posters/download.jfif', '', '..', 'JD', 'JD', 1, 0, '0000-00-00', 1, 1, '2026-04-09', ''),
-(49, 'nehagirish', 1, 49, 'image', '/rythm/posters/download.jfif', '', '', 'JD Master', 'Master JD  ', 2, 0, '0000-00-00', 1, 1, '2026-04-08', ''),
+(49, 'nehagirish', 1, 49, 'image', '/rythm/posters/download.jfif', '', '', 'JD Master', 'Master JD  ', 6, 0, '0000-00-00', 1, 1, '2026-04-08', ''),
 (51, 'nehagirish', 29, 51, 'video', '/rythm/posters/videoplayback.mp4', '', 'No Location', 'Youth Song', 'Youth Ken', 0, 0, '0000-00-00', 0, 1, '2026-04-09', ''),
 (52, 'nehagirish', 29, 52, 'video', '/rythm/posters/videoplayback.mp4', '', 'No Location', 'jd', 'jd', 1, 0, '0000-00-00', 1, 1, '2026-04-09', ''),
-(53, 'nehagirish', 29, 53, 'video', '', '/rythm/posters/videoplayback.mp4', '', 'youth', '', 2, 0, '0000-00-00', 1, 1, '2026-04-09', ''),
+(53, 'nehagirish', 29, 53, 'video', '', '/rythm/posters/videoplayback.mp4', '', 'youth', '', 2, 0, '0000-00-00', 0, 1, '2026-04-09', ''),
+(55, 'surya', 54, 55, 'image', '/rythm/posters/NEVER SETTLE_.jfif', '', 'peace', 'Motivation', 'Motivational  images', 0, 0, '0000-00-00', 0, 1, '2026-04-11', ''),
 (54, 'surya', 47, 54, 'image', '/rythm/posters/download (1).jfif', '', 'chenni', 'Peice ', 'peice restpiece', 0, 0, '0000-00-00', 0, 1, '2026-04-09', '');
 
 -- --------------------------------------------------------
@@ -547,7 +559,8 @@ INSERT INTO `posters_commads` (`id`, `posterid`, `commander_id`, `commands`, `li
 (32, 1, 1, 'ddd', 0, 0, '2026-04-07'),
 (33, 49, 1, 'hi', 0, 0, '2026-04-08'),
 (34, 47, 1, 'money ', 0, 0, '2026-04-08'),
-(35, 40, 1, 'hahah', 0, 0, '2026-04-09');
+(35, 40, 1, 'hahah', 0, 0, '2026-04-09'),
+(36, 47, 8, 'wallstreet', 0, 0, '2026-04-09');
 
 -- --------------------------------------------------------
 
@@ -579,6 +592,31 @@ INSERT INTO `poster_download` (`id`, `poster_id`, `downloader_id`, `donwload_sts
 (79, 53, 29, 1, '', '2026-04-09'),
 (80, 53, 46, 1, '', '2026-04-09'),
 (81, 44, 46, 1, '', '2026-04-09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `poster_likes`
+--
+
+CREATE TABLE `poster_likes` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `like_status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `poster_likes`
+--
+
+INSERT INTO `poster_likes` (`id`, `post_id`, `user_id`, `like_status`, `created_at`) VALUES
+(3, 49, 54, 0, '2026-04-17 10:11:00'),
+(4, 50, 54, 1, '2026-04-17 10:20:10'),
+(5, 45, 54, 0, '2026-04-17 10:33:49'),
+(6, 44, 54, 0, '2026-04-17 10:48:15'),
+(7, 43, 54, 1, '2026-04-17 10:48:53');
 
 -- --------------------------------------------------------
 
@@ -770,7 +808,11 @@ INSERT INTO `profile_details` (`id`, `rolemaster_id`, `about`, `facebook`, `twit
 (56, 8, 'testing', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2026-04-06', 1),
 (57, 8, 'testing ', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '8', '2026-04-06', 1),
 (58, 46, 'testing the profile', '', '', '', '', '../portfolio/HUSTLE.png.jfif', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '46', '2026-04-09', 1),
-(59, 47, 'user panel ', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '47', '2026-04-09', 1);
+(59, 47, 'user panel ', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '47', '2026-04-09', 1),
+(60, 49, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '49', '2026-04-10', 1),
+(61, 52, 'testing the site ', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '52', '2026-04-10', 1),
+(62, 54, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '54', '2026-04-10', 1),
+(63, 58, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '0000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '58', '2026-04-13', 1);
 
 -- --------------------------------------------------------
 
@@ -948,7 +990,8 @@ INSERT INTO `song_master` (`id`, `music_director`, `title`, `description`, `lang
 (11, '', 'hhhhhhhh', 'wertyuiervdsfdf', '3', 'Bombay_Theme.mp3', 'Bombay_Theme.mp3', 'Bombay_Theme.mp3', '1', 'singer', 0, '2023-04-15 12:40:48', 'active'),
 (18, '1', 'kanmani', '', '2', 'Bombay_Theme.mp3', 'load3.gif', '', '', 'singer', 0, '2025-03-21 11:55:57', ' in active'),
 (19, '1', 'ffff', '', '1', 'load3.gif', 'load3.gif', '', '', 'singer', 0, '2025-03-21 11:58:57', 'active'),
-(21, '9', 'chinna', '', '3', 'Paadarien.pdf', 'Paadarien.pdf', '', '', 'singer', 0, '2025-03-21 12:03:47', 'active');
+(21, '9', 'chinna', '', '3', 'Paadarien.pdf', 'Paadarien.pdf', '', '', 'singer', 0, '2025-03-21 12:03:47', 'active'),
+(22, '11', 'chinna', '', '1', 'Chinna Chinna Vanna Kuyil.mp3', 'Paadarien.pdf', '', '', 'Musician', 0, '2026-04-11 12:39:05', 'active');
 
 -- --------------------------------------------------------
 
@@ -978,6 +1021,7 @@ CREATE TABLE `user_master` (
   `user_name` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `apptoken` varchar(100) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
   `date_of_birth` varchar(255) DEFAULT NULL,
@@ -994,33 +1038,24 @@ CREATE TABLE `user_master` (
   `profile_update_status` int(11) NOT NULL,
   `profilepic_reason` varchar(2000) NOT NULL,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
-  `modified_on` varchar(255) DEFAULT NULL
+  `modified_on` varchar(255) DEFAULT NULL,
+  `otp` varchar(10) DEFAULT NULL,
+  `is_verified` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user_master`
 --
 
-INSERT INTO `user_master` (`id`, `users_id`, `role_master_id`, `name`, `profile_img`, `last_name`, `user_name`, `password`, `email`, `title`, `gender`, `date_of_birth`, `experience`, `tamil`, `malayalam`, `hindi`, `status`, `location`, `followsts`, `mobile_no`, `admin_status`, `reason`, `profile_update_status`, `profilepic_reason`, `created_on`, `modified_on`) VALUES
-(1, 1, 1, 'Janani', '', 'G', 'nehagirish', '8ace0553f2e5cbc047b699cbb260cf64', 'gkjanani89@gmail.com', 'singer', 'Female', '11-10-2010', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 1, 'kkkkk', 1, '', '2023-02-03 12:40:20', NULL),
-(9, 2, 2, 'blue', '/rythm/assets/bluebaselogooooooo.png', 'base', 'bluebase', 'cd84d683cc5612c69efe115c80d0b7dc', 'bluebase@gamil.in', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '8675746545', 1, 'test', 1, '', '2024-01-19 16:33:25', ''),
-(10, 3, 3, 'musician', '/rythm/assets/rsz_logo2.png', 'Test', 'rythmwoods', '827ccb0eea8a706c4c34a16891f84e7b', 'musician@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '9874512360', 1, '', 1, '', '2024-01-19 16:33:25', ''),
-(15, 4, 4, 'Ranjith', '', 'Kumar', 'Edward', '1b0fefa4fa04589f42683fe07be13d32', 'ranjith@gmail.com', 'amateur singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '8675746545', 1, '', 1, '', '2024-08-05 10:03:53', ''),
-(16, 5, 5, 'Event', '', 'Manager', 'Rajeshwari', '25d55ad283aa400af464c76d713c07ad', 'eventmanager@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6874591230', 1, '', 1, '', '2024-09-04 14:16:31', ''),
-(17, 6, 6, 'Lighting', '', 'Test', 'Janani', 'cd84d683cc5612c69efe115c80d0b7dc', 'lighting@gmail.com', 'fff', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6987451023', 1, '', 1, '', '2024-11-05 10:49:19', ''),
-(18, 7, 7, 'Sound', '', 'Test', 'priya', '9ea3a32e582d2514cf7d19032c90e4ae', 'sound@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9874512362', 1, '', 1, '', '2024-11-05 15:13:16', ''),
-(19, 8, 8, 'surya', '\\rythm\\assets\\rythmlogo.png', 'p', 'test1', 'cd84d683cc5612c69efe115c80d0b7dc', 'suryapanneer@gmail.com', 'user', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', 'chennai', 1, '7474488444', 1, '', 1, '', '2024-11-08 09:35:53', ''),
-(20, 1, 1, 'Janani', '', 'G', 'nehagirish', 'b946ed3f26085850b45808af967075e7', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 0, '', 1, '', '2024-12-27 07:38:46', ''),
-(21, 1, 1, 'Janani', '', 'G', 'nehagirish', 'e10adc3949ba59abbe56e057f20f883e', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 0, '', 1, '', '2025-04-01 19:20:55', ''),
-(29, 1, 1, 'Janani', '', 'G', 'nehagirish', '827ccb0eea8a706c4c34a16891f84e7b', 'gkjanani89@gmail.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 1, '', 1, '', '2025-05-29 14:13:18', ''),
-(32, 4, 4, 'Ranjith', '', 'Kumar', 'Ranjith', '827ccb0eea8a706c4c34a16891f84e7b', 'ranjith@gmail.com', 'bands', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '8675746545', 1, '', 1, '', '2025-06-16 10:31:10', ''),
-(33, 3, 3, 'musician', '', 'Test', 'musician', '827ccb0eea8a706c4c34a16891f84e7b', 'musician@gmail.com', 'musician', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9874512360', 1, '', 1, '', '2025-07-04 10:23:45', ''),
-(34, 5, 5, 'Event', '', 'Manager', 'Event', '827ccb0eea8a706c4c34a16891f84e7b', 'eventmanager@gmail.com', 'event managers', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6874591230', 1, '', 1, '', '2025-07-04 10:27:37', ''),
-(35, 6, 6, 'Lighting', '', 'Test', 'Lighting', '827ccb0eea8a706c4c34a16891f84e7b', 'lighting@gmail.com', 'lighting', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '6987451023', 1, '', 1, '', '2025-07-04 10:31:58', ''),
-(36, 7, 7, 'Sound', '', 'Test', 'Sound', '827ccb0eea8a706c4c34a16891f84e7b', 'sound@gmail.com', 'sounds', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9874512362', 1, '', 1, '', '2025-07-04 10:35:28', ''),
-(42, 1, 1, 'Janani', '', 'User', 'nehagirish', '482c811da5d5b4bc6d497ffa98491e38', 'test@test.com', 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 0, '9789957518', 0, '', 0, '', '2026-04-07 15:57:15', ''),
-(46, 46, 1, 'surya', '', 'p', 'surya', '827ccb0eea8a706c4c34a16891f84e7b', 'suryapanneer04@gmail.com', 'singer', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'chennai', 0, '9384178442', 1, '', 1, '', '2026-04-09 10:35:21', NULL),
-(47, 8, 8, 'surya', '', 'p', 'surya', '039c4ed9e206009a7875ff7251a67205', 'surya@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', 'chennai', 0, '9384178442', 1, '', 1, '', '2026-04-09 14:38:43', NULL);
+INSERT INTO `user_master` (`id`, `users_id`, `role_master_id`, `name`, `profile_img`, `last_name`, `user_name`, `password`, `email`, `apptoken`, `title`, `gender`, `date_of_birth`, `experience`, `tamil`, `malayalam`, `hindi`, `status`, `location`, `followsts`, `mobile_no`, `admin_status`, `reason`, `profile_update_status`, `profilepic_reason`, `created_on`, `modified_on`, `otp`, `is_verified`) VALUES
+(9, 2, 2, 'blue', '/rythm/assets/bluebaselogooooooo.png', 'base', 'bluebase', 'cd84d683cc5612c69efe115c80d0b7dc', 'bluebase@gamil.in', NULL, 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '8675746545', 1, 'test', 1, '', '2024-01-19 16:33:25', '', NULL, 0),
+(16, 5, 5, 'Event', '', 'Manager', 'Rajeshwari', '25d55ad283aa400af464c76d713c07ad', 'eventmanager@gmail.com', NULL, 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '6874591230', 1, '', 1, '', '2024-09-04 14:16:31', '', NULL, 0),
+(17, 6, 6, 'Lighting', '', 'Test', 'Janani', 'cd84d683cc5612c69efe115c80d0b7dc', 'lighting@gmail.com', NULL, 'fff', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '6987451023', 1, '', 1, '', '2024-11-05 10:49:19', '', NULL, 0),
+(20, 1, 1, 'Janani', '', 'G', 'nehagirish', 'b946ed3f26085850b45808af967075e7', 'gkjanan@gmail.com', NULL, 'singer', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '9789957518', 0, '', 1, '', '2024-12-27 07:38:46', '', NULL, 0),
+(32, 32, 4, 'Ranjith', '', 'Kumar', 'Ranjith', '827ccb0eea8a706c4c34a16891f84e7b', 'ranjith@gmail.com', NULL, 'bands', NULL, '0000-00-00', NULL, NULL, NULL, NULL, '0', '', 1, '8675746545', 1, '', 1, '', '2025-06-16 10:31:10', '', NULL, 0),
+(46, 46, 1, 'suryatest', '', 'p', 'suryatest', '827ccb0eea8a706c4c34a16891f84e7b', 'suryapanneer@gmail.com', NULL, 'singer', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'chennai', 1, '9384178442', 1, '', 1, '', '2026-04-09 10:35:21', NULL, NULL, 1),
+(54, 54, 3, 'surya', '/rythm/profile_photos/user_54_1776249087.jfif', 'p', 'surya', '$2y$10$bt2jk98i6jDSKLL4sh3YNeGgmdCFZSO2U6d8jwCKyEpqnzYoKwdpO', 'suryapanneer04@gmail.com', NULL, 'Musician', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'chennai', 1, '9384178442', 1, '', 1, '', '2026-04-10 13:03:50', NULL, '343311', 1),
+(58, 58, 3, 'priya', 'uploads/profile/1776075568.jfif', 'p', 'priya', '$2y$10$EHJJudfLTrqPioMgsBUDueov.OOqSW/b08OxKop56KRIRpUvK3aXy', 'priya@gmail.com', NULL, 'Musician', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'chennai', 0, '1234567890', 1, '', 1, '', '2026-04-13 14:51:58', NULL, '557978', 1);
 
 -- --------------------------------------------------------
 
@@ -1145,6 +1180,12 @@ ALTER TABLE `poster_download`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `poster_likes`
+--
+ALTER TABLE `poster_likes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -1209,7 +1250,9 @@ ALTER TABLE `users`
 -- Indexes for table `user_master`
 --
 ALTER TABLE `user_master`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `users_id` (`users_id`);
 
 --
 -- Indexes for table `verification_requests`
@@ -1243,7 +1286,7 @@ ALTER TABLE `daily_task`
 -- AUTO_INCREMENT for table `following_details`
 --
 ALTER TABLE `following_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `forgot_password`
@@ -1255,7 +1298,7 @@ ALTER TABLE `forgot_password`
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `lyrics`
@@ -1279,7 +1322,7 @@ ALTER TABLE `masters_sub_menu`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `movie_composer`
@@ -1297,7 +1340,7 @@ ALTER TABLE `movie_singer`
 -- AUTO_INCREMENT for table `music_directors`
 --
 ALTER TABLE `music_directors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `otptable`
@@ -1309,19 +1352,25 @@ ALTER TABLE `otptable`
 -- AUTO_INCREMENT for table `posters`
 --
 ALTER TABLE `posters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `posters_commads`
 --
 ALTER TABLE `posters_commads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `poster_download`
 --
 ALTER TABLE `poster_download`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+--
+-- AUTO_INCREMENT for table `poster_likes`
+--
+ALTER TABLE `poster_likes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -1333,7 +1382,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `profile_details`
 --
 ALTER TABLE `profile_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `profile_photo_uploaded`
@@ -1375,7 +1424,7 @@ ALTER TABLE `singers`
 -- AUTO_INCREMENT for table `song_master`
 --
 ALTER TABLE `song_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1387,7 +1436,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_master`
 --
 ALTER TABLE `user_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `verification_requests`

@@ -1,69 +1,40 @@
 <?php
+include("includes/config.php");
 
-session_start();
-
-include("connect.php");
-
-
-$username = $_SESSION['username'];
-$rolemaster_id = $_SESSION['role_master_id'];
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
- $postId = $_POST['post_id'];
-$likeStatus = $_POST['like_status'];
-
-$getcountoflikes = $con->query("SELECT *, SUM(likestatus) as likescount FROM `posters` WHERE id='$postId'");
-
-$row = $getcountoflikes->fetch(PDO::FETCH_ASSOC);
-
-$countoflike = $row['likescount']; // total number of likes
-
-if ($likeStatus == 1) {
-    $addlikes = $countoflike + 1;
-	
-	 // Use prepared statements to prevent SQL injection
-    $updateQuery = $con->query("UPDATE `posters` SET `likestatus` = '$addlikes',`ownlikessts` = '1' WHERE `id` = '$postId'");
-	//echo "UPDATE `posters` SET `likestatus` = '$addlikes',`ownlikessts` = '1' WHERE `id` = '$postId'";
-    
-   
-} 
-else if ($likeStatus == 0) { // Change from -1 to 0 for dislikes
- 
-     $addlikes = $countoflike-1;
-	 
- // Use prepared statements to prevent SQL injection
-    $updateQuery = $con->query("UPDATE `posters` SET `likestatus` = '$addlikes',`ownlikessts` = '0' WHERE `id` = '$postId'");
-	//echo "UPDATE `posters` SET `likestatus` = '$likeStatus' WHERE `id` = '$postId'";
-    
-   
-   // echo $addlikes . 'fghgdfgh';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
+$user_id = $_SESSION['users_id'] ?? 0;
 
-   
-  if($updateQuery)
-  {
-	//echo 'likests"'.$likeStatus.'"';  
-	$countoflikests=$con->query("SELECT *,SUM(likestatus) as likesttcount FROM `posters` WHERE id='$postId' and likestatus!=0 ");
-	$row1=$countoflikests->fetch(PDO::FETCH_ASSOC);
-	 
-	 echo $row1['likesttcount'].'likes';
-	 
-	 
-		 
-  }
-  else
-  {
-	  $countoflikests=$con->query("SELECT *,SUM(likestatus) as likesttcount FROM `posters` WHERE id='$postId' and likestatus!=0 ");
-	  $row2=$countoflikests->fetch(PDO::FETCH_ASSOC);
-	  
-	  echo $row2['likesttcount'].'likes';
-  }
-   
-}
- else {
-    echo "Invalid request method";
+$post_id = $_POST['post_id'];
+$like_status = $_POST['like_status'];
 
+if ($user_id == 0) {
+    echo "0";
+    exit;
 }
+
+// check already liked
+$check = $con->prepare("SELECT * FROM poster_likes WHERE post_id=? AND user_id=?");
+$check->execute([$post_id, $user_id]);
+$row = $check->fetch(PDO::FETCH_ASSOC);
+
+if ($row) {
+
+    $stmt = $con->prepare("UPDATE poster_likes SET like_status=? WHERE post_id=? AND user_id=?");
+    $stmt->execute([$like_status, $post_id, $user_id]);
+
+} else {
+
+    $stmt = $con->prepare("INSERT INTO poster_likes (post_id, user_id, like_status) VALUES (?, ?, ?)");
+    $stmt->execute([$post_id, $user_id, $like_status]);
+}
+
+// return updated count
+$count = $con->prepare("SELECT COUNT(*) as cnt FROM poster_likes WHERE post_id=? AND like_status=1");
+$count->execute([$post_id]);
+$data = $count->fetch(PDO::FETCH_ASSOC);
+
+echo $data['cnt'];
 ?>

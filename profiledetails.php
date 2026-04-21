@@ -218,12 +218,16 @@ WHERE
  ?>
 <div class="profile-details-container">
     <div class="profile-header">
-        <div class="profile-img-container">
+        <div class="profile-img-container position-relative" style="cursor: pointer; position: relative; width: 150px; height: 150px;" onclick="chnageprofilepic(<?php echo $getallposters2['id']?>);">
             <?php if($getallposters2['profile_img'] != '') { ?>
-                <img src="<?php echo $getallposters2['profile_img'];?>" alt="Profile Picture" class="profile-img" onclick="chnageprofilepic(<?php echo $getallposters2['id']?>);">
+                <img src="<?php echo $getallposters2['profile_img'];?>" alt="Profile Picture" class="profile-img" style="width: 100%; height: 100%;">
             <?php } else { ?>
-                <img src="/rythm/assets/profile.png" alt="Profile Picture" class="profile-img" onclick="chnageprofilepic(<?php echo $getallposters2['id']?>);">
+                <img src="/rythm/assets/profile.png" alt="Profile Picture" class="profile-img" style="width: 100%; height: 100%;">
             <?php } ?>
+            <!-- Camera Icon Overlay -->
+            <div style="position: absolute; bottom: 5px; right: 5px; background: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #dbdbdb; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <i class="fa fa-camera text-muted"></i>
+            </div>
         </div>
         <div class="profile-info">
             <div class="profile-title-row">

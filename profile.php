@@ -82,10 +82,15 @@ include("includes/header.php");
             <form method="POST" enctype="multipart/form-data" style="display:inline;">
                 <input type="file" name="profile_img" id="profileInput" hidden onchange="this.form.submit()">
                 
-                <label for="profileInput" style="cursor:pointer;">
+                <label for="profileInput" class="position-relative d-inline-block" style="cursor:pointer;">
                     <img src="<?php echo !empty($user_data['profile_img']) ? $user_data['profile_img'] : '/rythm/assets/profile.png'; ?>" 
                         class="rounded-circle border border-2"
                         style="width:150px;height:150px;object-fit:cover;">
+                    <!-- Camera Icon Overlay -->
+                    <div class="position-absolute bottom-0 end-0 bg-white rounded-circle shadow-sm border p-2 d-flex align-items-center justify-content-center" 
+                         style="width: 40px; height: 40px; transform: translate(-5px, -5px);">
+                        <i class="fa fa-camera text-muted"></i>
+                    </div>
                 </label>
             </form>
         </div>

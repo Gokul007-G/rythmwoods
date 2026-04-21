@@ -268,18 +268,17 @@ require("connect.php");
     $getdata = $getcntfollowing->fetch(PDO::FETCH_ASSOC);
     ?>
     <div class="container-profile">
-        <div class="profile-header">
-            <?php
-            if ($getallposters2['profile_img'] != '') {
-            ?>
-                <img src="<?php echo $getallposters2['profile_img']; ?>" alt="Profile Picture" class="profile-img" style="border: 5px solid pink; border-radius: 50%;" onclick="chnageprofilepic(<?php echo $getallposters2['id'] ?>);">
-            <?php
-            } else {
-            ?>
-                <img src="/rythm/assets/profile.png" alt="Profile Picture" class="profile-img" style="border: 5px solid pink; border-radius: 50%;" onclick="chnageprofilepic(<?php echo $getallposters2['id'] ?>);">
-            <?php
-            }
-            ?>
+            <div class="profile-img-container position-relative" style="width: 150px; height: 150px; margin-right: 30px; cursor: pointer;" onclick="chnageprofilepic(<?php echo $getallposters2['id'] ?>);">
+                <?php if ($getallposters2['profile_img'] != '') { ?>
+                    <img src="<?php echo $getallposters2['profile_img']; ?>" alt="Profile Picture" class="profile-img" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 5px solid pink;">
+                <?php } else { ?>
+                    <img src="/rythm/assets/profile.png" alt="Profile Picture" class="profile-img" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 5px solid pink;">
+                <?php } ?>
+                <!-- Camera Icon Overlay -->
+                <div style="position: absolute; bottom: 5px; right: 5px; background: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <i class="fa fa-camera text-muted"></i>
+                </div>
+            </div>
             <div class="profile-info">
                 <div style="display:flex;justify-content:flex-start;gap:120px;">
                     <h1><?php echo ucfirst($getallposters2['user_name']); ?></h1><a href="#" class="edit-profile-button">Edit</a>

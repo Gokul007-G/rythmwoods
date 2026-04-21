@@ -25,19 +25,26 @@ $stmt->execute([$sender,$receiver,$receiver,$sender]);
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 
     $msg = htmlspecialchars($row['message'], ENT_QUOTES, 'UTF-8');
+    $time = date('h:i A', strtotime($row['timestamp']));
 
     if($row['sender_id'] == $sender){
-        echo "<div style='text-align:right'>
-                <p style='background:#0084ff;color:#fff;display:inline-block;padding:8px;border-radius:10px;'>
-                ".$msg."
-                </p>
-              </div>";
+        // SENDER (RIGHT)
+        echo '
+        <div class="d-flex flex-column align-items-end mb-2">
+            <div style="background: var(--rythm-deep-pink); color: #fff; padding: 10px 18px; border-radius: 20px 20px 0 20px; max-width: 75%; box-shadow: 0 4px 10px rgba(255, 0, 127, 0.1);">
+                '.$msg.'
+            </div>
+            <small style="font-size: 10px; color: #aaa; margin-top: 4px; margin-right: 5px;">'.$time.'</small>
+        </div>';
     } else {
-        echo "<div>
-                <p style='background:#eee;padding:8px;border-radius:10px;display:inline-block;'>
-                ".$msg."
-                </p>
-              </div>";
+        // RECEIVER (LEFT)
+        echo '
+        <div class="d-flex flex-column align-items-start mb-2">
+            <div style="background: #f0f0f0; color: #333; padding: 10px 18px; border-radius: 20px 20px 20px 0; max-width: 75%; border: 1px solid #eee;">
+                '.$msg.'
+            </div>
+            <small style="font-size: 10px; color: #aaa; margin-top: 4px; margin-left: 5px;">'.$time.'</small>
+        </div>';
     }
 }
 ?>

@@ -2,6 +2,7 @@
 session_start();
 require("connect.php");
 $username = $_SESSION['username'];
+$users_id = $_SESSION['users_id']; // Current logged in user ID
 $rolemaster_id = $_SESSION['role_master_id'];
 
 $profile_name = $_SESSION['user_name'];
@@ -34,9 +35,15 @@ while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
         $postimgid = 'postimgid_' . $data['id'];
         $postvideoid = 'postvideoid_' . $data['id'];
 
-        $countoflikests = $con->query("SELECT *,SUM(likestatus) as countoflike FROM `posters` WHERE id='$postimgggiddd' and likestatus!=0 ");
-
+        // Correctly count likes from poster_likes table
+        $countoflikests = $con->prepare("SELECT COUNT(*) as countoflike FROM poster_likes WHERE post_id=? AND like_status=1");
+        $countoflikests->execute([$postimgggiddd]);
         $getdata = $countoflikests->fetch(PDO::FETCH_ASSOC);
+
+        // Fetch current user's like status
+        $userLikeStmt = $con->prepare("SELECT like_status FROM poster_likes WHERE post_id=? AND user_id=?");
+        $userLikeStmt->execute([$postimgggiddd, $users_id]);
+        $userLike = $userLikeStmt->fetch(PDO::FETCH_ASSOC);
 
         $getprofile = $con->query("SELECT * FROM `user_master` WHERE users_id='$usernameee_id'");
         //echo "SELECT * FROM `user_master` WHERE users_id='$usernameee_id'";
@@ -83,14 +90,9 @@ while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
                 <div class="icons" style="display:flex;justify-content:flex-start;gap:30px;margin:0 120px;">
                     <div class="icon" onclick="toggleLike(<?php echo $dyn; ?>)">
                         <?php
-                        if ($data['ownlikessts'] == 0 && $data['username_id'] == $rolemaster_id) {
-                        ?>
-                            <img id="likeIcon_<?php echo $dyn; ?>" src="/rythm/assets/likeheart.png" alt="Heart Icon" class="zoomiconns" style="height:25px;width:25px;">
-                        <?php
-                        } else if ($data['ownlikessts'] == 1 && $data['username_id'] == $rolemaster_id) {
+                        if ($userLike && $userLike['like_status'] == 1) {
                         ?>
                             <img id="likeIcon_<?php echo $dyn; ?>" src="/rythm/assets/likeredhreat.png" alt="Heart Icon" class="zoomiconns" style="height:25px;width:25px;">
-
                         <?php
                         } else {
                         ?>
@@ -201,7 +203,7 @@ while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
                                         placeholder="Add a Comment"
                                         onkeyup="count_char(this, 140);"></textarea> <span id="bio_val"></span>
                                     <br>
-                                    <label id="postatag<?php echo $dyn; ?>" style="color:blue;display:none;float:right;" onclick="commandinsert(<?php echo $dyn; ?>, <?php echo $data['id']; ?>,  <?php echo $rolemaster_id; ?>);">Post</label>
+                                    <label id="postatag<?php echo $dyn; ?>" style="color:blue;display:none;float:right;" onclick="commandinsert(<?php echo $dyn; ?>, <?php echo $data['id']; ?>,  <?php echo $users_id; ?>);">Post</label>
                                 </div>
                             </div>
                         </div>
@@ -307,7 +309,7 @@ while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
 
             </div>
             <?php
-            $saveddata = $con->query("SELECT * FROM `poster_download` WHERE poster_id='$posteriddddd' and downloader_id='$rolemaster_id' and donwload_sts!=0 order by id desc");
+            $saveddata = $con->query("SELECT * FROM `poster_download` WHERE poster_id='$posteriddddd' and downloader_id='$users_id' and donwload_sts='1' order by id desc");
 
             if ($saveddata) {
                 $getsave_data = $saveddata->fetch(PDO::FETCH_ASSOC);
@@ -341,7 +343,7 @@ while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
         </div>
         <br>
         <div style="margin-left:120px">
-            <label style="font-weight:600;" id="likelbelidd_<?php echo $dyn; ?>"><?php echo $getdata['countoflike'] . 'likes'; ?></label><br><br>
+            <label style="font-weight:600;" id="likelbelidd_<?php echo $dyn; ?>"><?php echo $getdata['countoflike']; ?> likes</label><br><br>
             <div style="max-width: 400px;">
                 <label style="font-weight:600;"><?php echo ucfirst($data['username']) ?></label>&nbsp <?php echo  ucfirst($data['posters_caption']); ?><br><br>
                 <div class="comment-section" onkeyup="typeacommand(<?php echo $dyn; ?>);" style="width:110vh;margin-left:8px;">
@@ -351,7 +353,7 @@ while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
                         placeholder="Add a Comment"
                         onkeyup="count_char(this, 140);"></textarea> <span id="bio_val"></span>
                     <br>
-                    <label id="postatag_<?php echo $dyn; ?>" style="color:blue;display:none;" onclick="commandinsert(<?php echo $dyn; ?>, <?php echo $data['id']; ?>,  <?php echo $rolemaster_id; ?>);">Post</label>
+                    <label id="postatag_<?php echo $dyn; ?>" style="color:blue;display:none;" onclick="commandinsert(<?php echo $dyn; ?>, <?php echo $data['id']; ?>,  <?php echo $users_id; ?>);">Post</label>
                 </div>
             </div>
             <hr>
@@ -682,49 +684,54 @@ while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
 </script>
 
 <script>
-    let isLiked = false;
-
     function toggleLike(dyyid) {
-        //	debugger;
-        isLiked = !isLiked;
         var likeIcon = document.getElementById('likeIcon_' + dyyid);
         var postimgvideoid = document.getElementById('postimgvideoid' + dyyid).value;
+        var likeLabel = document.getElementById('likelbelidd_' + dyyid);
 
-        if (isLiked) {
+        // Prevent double clicks
+        likeIcon.style.pointerEvents = "none";
+
+        // Check current state from image source
+        var isCurrentlyLiked = likeIcon.src.includes('likeredhreat.png');
+        var newLikeStatus = isCurrentlyLiked ? 0 : 1;
+
+        // Optimistic UI update
+        if (newLikeStatus === 1) {
             likeIcon.src = "/rythm/assets/likeredhreat.png";
             likeIcon.style.filter = "brightness(1.2)";
-            updateLikeStatus(postimgvideoid, 1, dyyid); // 1 indicates liked
         } else {
             likeIcon.src = "/rythm/assets/likeheart.png";
             likeIcon.style.filter = "brightness(1)";
-            updateLikeStatus(postimgvideoid, 0, dyyid); // 0 indicates unliked
         }
-    }
 
-    function updateLikeStatus(postId, likeStatus, dyyid) {
-        //	debugger;
         $.ajax({
             type: 'POST',
             url: 'updatelikests.php',
             data: {
-                post_id: postId,
-                like_status: likeStatus
+                post_id: postimgvideoid,
+                like_status: newLikeStatus
             },
             success: function(dta) {
-
-                console.warn(dta);
-
-                document.getElementById('likelbelidd_' + dyyid).innerText = dta;
-                //window.location.href='/rythm/homee.php';				   
-
+                // Update with latest count from server
+                likeLabel.innerText = dta + ' likes';
             },
             error: function(error) {
-
-                // console.error(error);
+                console.error(error);
+                // Rollback UI on error
+                if (isCurrentlyLiked) {
+                    likeIcon.src = "/rythm/assets/likeredhreat.png";
+                    likeIcon.style.filter = "brightness(1.2)";
+                } else {
+                    likeIcon.src = "/rythm/assets/likeheart.png";
+                    likeIcon.style.filter = "brightness(1)";
+                }
+            },
+            complete: function() {
+                likeIcon.style.pointerEvents = "auto";
             }
         });
     }
-</script>
 
 <script>
     let isLiked2 = false;

@@ -44,10 +44,15 @@ include("includes/header.php");
             $profile_img_data = $getprofile->fetch(PDO::FETCH_ASSOC);
             $profile_pic_url = (!empty($profile_img_data['profile_img'])) ? $profile_img_data['profile_img'] : '/rythm/assets/lion.png';
             
-            // Like Count
-            $like_stmt = $con->prepare("SELECT SUM(likestatus) FROM `posters` WHERE id=?");
+            // Like Count from poster_likes table
+            $like_stmt = $con->prepare("SELECT COUNT(*) FROM `poster_likes` WHERE post_id=? AND like_status=1");
             $like_stmt->execute([$post_id]);
             $likecount = intval($like_stmt->fetchColumn() ?? 0);
+
+            // Check if user liked it
+            $user_liked_stmt = $con->prepare("SELECT id FROM `poster_likes` WHERE post_id=? AND user_id=? AND like_status=1");
+            $user_liked_stmt->execute([$post_id, $_SESSION['users_id']]);
+            $user_liked = $user_liked_stmt->fetch();
     ?>
     
     <!-- Post Card -->
@@ -110,7 +115,7 @@ include("includes/header.php");
         <div class="card-body p-3">
             <div class="d-flex justify-content-between mb-2 fs-4">
                 <div class="d-flex gap-3">
-                    <i class="fa-regular fa-heart cursor-pointer toggle-like" data-id="<?php echo $post_id; ?>" style="color: var(--rythm-deep-pink);"></i>
+                    <i class="<?php echo $user_liked ? 'fa-solid' : 'fa-regular'; ?> fa-heart cursor-pointer toggle-like" data-id="<?php echo $post_id; ?>" style="color: var(--rythm-deep-pink);"></i>
                     <i class="fa-regular fa-comment cursor-pointer" onclick="openCommentModal(<?php echo $post_id; ?>, <?php echo $dyn; ?>)"></i>
                     <i class="fa-regular fa-paper-plane cursor-pointer" onclick="sharePost(<?php echo $post_id; ?>)"></i>
                 </div>
