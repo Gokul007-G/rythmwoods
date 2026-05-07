@@ -22,8 +22,13 @@ $row = $check->fetch(PDO::FETCH_ASSOC);
 
 if ($row) {
 
-    $stmt = $con->prepare("UPDATE poster_likes SET like_status=? WHERE post_id=? AND user_id=?");
-    $stmt->execute([$like_status, $post_id, $user_id]);
+     if ($like_status == 0) {
+        // if unlike, delete row
+        $stmt = $con->prepare("DELETE FROM poster_likes WHERE post_id=? AND user_id=?");
+        $stmt->execute([$post_id, $user_id]);
+    } 
+    // $stmt = $con->prepare("UPDATE poster_likes SET like_status=? WHERE post_id=? AND user_id=?");
+    // $stmt->execute([$like_status, $post_id, $user_id]);
 
 } else {
 

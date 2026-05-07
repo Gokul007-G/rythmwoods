@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2026 at 01:31 PM
+-- Generation Time: May 07, 2026 at 07:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -346,7 +346,8 @@ INSERT INTO `messages` (`id`, `sender_id`, `receiver_id`, `message`, `timestamp`
 (9, 54, 2, 'how are you', '2026-04-13 15:44:37', 0),
 (10, 54, 58, 'are you there ?', '2026-04-13 15:45:22', 0),
 (11, 58, 54, 'hi', '2026-04-13 15:46:31', 0),
-(12, 58, 54, 'how are you', '2026-04-13 15:46:51', 0);
+(12, 58, 54, 'how are you', '2026-04-13 15:46:51', 0),
+(13, 54, 58, 'hello', '2026-05-07 11:26:38', 0);
 
 -- --------------------------------------------------------
 
@@ -612,11 +613,10 @@ CREATE TABLE `poster_likes` (
 --
 
 INSERT INTO `poster_likes` (`id`, `post_id`, `user_id`, `like_status`, `created_at`) VALUES
-(3, 49, 54, 0, '2026-04-17 10:11:00'),
 (4, 50, 54, 1, '2026-04-17 10:20:10'),
-(5, 45, 54, 0, '2026-04-17 10:33:49'),
-(6, 44, 54, 0, '2026-04-17 10:48:15'),
-(7, 43, 54, 1, '2026-04-17 10:48:53');
+(7, 43, 54, 1, '2026-04-17 10:48:53'),
+(10, 55, 54, 1, '2026-04-21 07:30:57'),
+(11, 55, 58, 1, '2026-04-21 07:31:44');
 
 -- --------------------------------------------------------
 
@@ -1322,7 +1322,7 @@ ALTER TABLE `masters_sub_menu`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `movie_composer`
@@ -1370,7 +1370,7 @@ ALTER TABLE `poster_download`
 -- AUTO_INCREMENT for table `poster_likes`
 --
 ALTER TABLE `poster_likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `posts`
